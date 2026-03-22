@@ -459,11 +459,14 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
 .fb-name strong{display:block;font-size:0.88rem;font-weight:800;color:#fff;}
 .fb-name span{font-size:0.62rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.06em;}
 .fb-desc{font-size:0.8rem;color:rgba(255,255,255,0.38);line-height:1.8;max-width:270px;margin-bottom:18px;}
-.fb-socials{display:flex;gap:7px;}
-.fsl{width:33px;height:33px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-.fsl:hover{border-color:var(--maroon-light);background:rgba(139,26,46,0.2);}
+.fb-socials{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+.fsl{width:36px;height:36px;border:1px solid rgba(255,255,255,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.fsl:hover:not(.fsl-social){border-color:var(--maroon-light);background:rgba(139,26,46,0.2);}
 .fsl svg{width:14px;height:14px;stroke:rgba(255,255,255,0.45);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.2s;}
-.fsl:hover svg{stroke:var(--maroon-light);}
+.fsl:hover:not(.fsl-social) svg{stroke:var(--maroon-light);}
+.fsl-social:hover{border-color:rgba(92,107,128,0.55);background:rgba(92,107,128,0.1);}
+.fsl-social svg{width:18px;height:18px;stroke:#5C6B80;stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.2s;}
+.fsl-social:hover svg{stroke:#94a3b8;}
 .fc h4{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.3);margin-bottom:16px;}
 .fc ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
 .fc ul li a{font-size:0.8rem;color:rgba(255,255,255,0.5);transition:color 0.2s;}
@@ -528,7 +531,7 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
     <span><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Mwihoko Road, Kasarani</span>
     <span>⚡ 24/7 Emergency</span>
   </div>
-  <div class="topbar-right"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2d494843434245405a4c5e1e186d4a404c4441034e4240">[email&#160;protected]</a></div>
+  <div class="topbar-right"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:info@dmelectricals.com" style="color:inherit;">info@dmelectricals.com</a></div>
 </div>
 
 <!-- NAV -->
@@ -650,6 +653,7 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
       <button class="pcat" onclick="filterProd('appliances',this)">Appliances</button>
       <button class="pcat" onclick="filterProd('lighting',this)">Lighting</button>
       <button class="pcat" onclick="filterProd('power',this)">Power &amp; Protection</button>
+      <button class="pcat" onclick="filterProd('smart',this)">Smart Home</button>
     </div>
           <div class="prod-grid" id="prodGrid">
       <div class="prod-card" data-cat="wiring" onclick="waProduct('PVC Armoured Cable (2.5mm – 25mm)')">
@@ -715,6 +719,39 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
           <span class="prod-tag">Fittings</span>
           <div class="prod-name">Switches &amp; Sockets</div>
           <div class="prod-desc">Single, double, gang switches and power sockets including USB-C integrated and weatherproof models.</div>
+          <button class="prod-wa-btn"><svg viewBox="0 0 24 24" fill="#fff" stroke="none" width="13" height="13"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enquire on WhatsApp</button>
+        </div>
+      </div>
+      <div class="prod-card" data-cat="smart" onclick="waProduct('Smart Switch (Wi‑Fi / Zigbee)')">
+        <div class="prod-img-bg" style="background-image:url('https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&amp;q=80')"></div>
+        <div class="prod-overlay"></div>
+        <div class="prod-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h4"/></svg></div>
+        <div class="prod-content">
+          <span class="prod-tag">Smart Home</span>
+          <div class="prod-name">Smart Switch</div>
+          <div class="prod-desc">Wi‑Fi / Zigbee touch and dimmer switches — app, voice, and scene control for modern homes and offices.</div>
+          <button class="prod-wa-btn"><svg viewBox="0 0 24 24" fill="#fff" stroke="none" width="13" height="13"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enquire on WhatsApp</button>
+        </div>
+      </div>
+      <div class="prod-card" data-cat="smart" onclick="waProduct('Smart Curtain / Motorized Track')">
+        <div class="prod-img-bg" style="background-image:url('https://images.unsplash.com/photo-1615529328331-f8917597711f?w=600&amp;q=80')"></div>
+        <div class="prod-overlay"></div>
+        <div class="prod-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M9 4v16M15 4v16"/></svg></div>
+        <div class="prod-content">
+          <span class="prod-tag">Smart Home</span>
+          <div class="prod-name">Smart Curtain</div>
+          <div class="prod-desc">Motorized curtain tracks and blinds — remote, timer, and smart-home integration for privacy and light control.</div>
+          <button class="prod-wa-btn"><svg viewBox="0 0 24 24" fill="#fff" stroke="none" width="13" height="13"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enquire on WhatsApp</button>
+        </div>
+      </div>
+      <div class="prod-card" data-cat="smart" onclick="waProduct('Smart Lock (Fingerprint / App)')">
+        <div class="prod-img-bg" style="background-image:url('https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&amp;q=80')"></div>
+        <div class="prod-overlay"></div>
+        <div class="prod-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M7 11V9a5 5 0 0110 0v2"/></svg></div>
+        <div class="prod-content">
+          <span class="prod-tag">Smart Home</span>
+          <div class="prod-name">Smart Locks</div>
+          <div class="prod-desc">Digital door locks — fingerprint, PIN, card, and app unlock with audit trails for homes and commercial doors.</div>
           <button class="prod-wa-btn"><svg viewBox="0 0 24 24" fill="#fff" stroke="none" width="13" height="13"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enquire on WhatsApp</button>
         </div>
       </div>
@@ -972,13 +1009,13 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
         <div class="ci-list">
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.93a16 16 0 006.09 6.09l1.29-1.29a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><h4>Phone / WhatsApp</h4><p><a href="tel:0799762232">0799 762 232</a> &nbsp;|&nbsp; <a href="tel:0762748694">0762 748 694</a><br>Call or WhatsApp — 24/7 Emergency</p></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Address</h4><p>Mwihoko Road, Kasarani, Nairobi, Kenya</p></div></div>
-          <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection#3450515a5a5b5c594355470701745359555d581a575b59"><span class="__cf_email__" data-cfemail="a8cccdc6c6c7c0c5dfc9db9b9de8cfc5c9c1c486cbc7c5">[email&#160;protected]</span></a></p></div></div>
+          <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h4>Email</h4><p><a href="mailto:info@dmelectricals.com">info@dmelectricals.com</a></p></div></div>
           <div class="ci"><div class="ci-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4>Working Hours</h4><p>Mon–Sat: 7:00 AM – 7:00 PM &nbsp;|&nbsp; Emergency: 24/7</p></div></div>
         </div>
         <div class="c-btns">
           <a href="tel:0799762232" class="btn-filled"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2"/></svg>Call Now</a>
           <a href="https://wa.me/254799762232" class="btn-ghost" target="_blank">WhatsApp ↗</a>
-          <a href="/cdn-cgi/l/email-protection#89edece7e7e6e1e4fee8fababcc9eee4e8e0e5a7eae6e4" class="btn-ghost">Email ↗</a>
+          <a href="mailto:info@dmelectricals.com" class="btn-ghost">Email ↗</a>
         </div>
       </div>
       <div class="cform">
@@ -987,7 +1024,7 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
         <div class="fg2"><div class="fg"><label>First Name</label><input type="text" placeholder="John" id="fn"></div><div class="fg"><label>Last Name</label><input type="text" placeholder="Doe" id="ln"></div></div>
         <div class="fg"><label>Phone Number</label><input type="tel" placeholder="0700 000 000" id="ph"></div>
         <div class="fg"><label>Email (optional)</label><input type="email" placeholder="your@email.com"></div>
-        <div class="fg"><label>Service Required</label><select id="svc"><option value="">Select a service…</option><option>Electrical &amp; Industrial Installation</option><option>Electrical Fittings</option><option>Appliances Installation</option><option>Cables</option><option>Electric Fence</option><option>Fire &amp; Alarm Systems</option><option>CCTV &amp; Security</option><option>Wiring &amp; Rewiring</option><option>Emergency Repair</option><option>Products Enquiry</option><option>Other</option></select></div>
+        <div class="fg"><label>Service Required</label><select id="svc"><option value="">Select a service…</option><option>Electrical &amp; Industrial Installation</option><option>Electrical Fittings</option><option>Appliances Installation</option><option>Cables</option><option>Electric Fence</option><option>Fire &amp; Alarm Systems</option><option>CCTV &amp; Security</option><option>Wiring &amp; Rewiring</option><option>Emergency Repair</option><option>Products Enquiry</option><option>Smart Home (switches, curtains, locks)</option><option>Other</option></select></div>
         <div class="fg"><label>Your Location</label><input type="text" placeholder="e.g. Kasarani, Roysambu…" id="loc"></div>
         <div class="fg"><label>Project Details</label><textarea rows="4" placeholder="Describe your electrical project or issue…" id="msg"></textarea></div>
         <button class="btn-filled" style="width:100%;justify-content:center;" onclick="doForm()">Submit Request ↗</button>
@@ -1006,16 +1043,19 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
         <div class="fb-logo"><div class="fb-mark"><span class="fb-mark-txt">DM</span></div><div class="fb-name"><strong>DM ELECTRICALS</strong><span>&amp; Installation · Nairobi</span></div></div>
         <p class="fb-desc">Your trusted electrical partner on Mwihoko Road, Kasarani, Nairobi. Fittings, cables, CCTV, alarms, electric fences, and full installations.</p>
         <div class="fb-socials">
-          <a href="#" class="fsl"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-          <a href="https://wa.me/254799762232" class="fsl" target="_blank"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/><path d="M2 1h3"/></svg></a>
-          <a href="/cdn-cgi/l/email-protection#197d7c77777671746e786a2a2c597e74787075377a7674" class="fsl"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+          <a href="https://www.instagram.com/" class="fsl fsl-social" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+          <a href="https://x.com/" class="fsl fsl-social" target="_blank" rel="noopener noreferrer" aria-label="X" title="X"><svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg></a>
+          <a href="https://www.linkedin.com/" class="fsl fsl-social" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 10-4 0v7h-4V8h4v2"/><path d="M4 8h4v12H4V8z"/></svg></a>
+          <a href="https://www.tiktok.com/" class="fsl fsl-social" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 108 0V8a5 5 0 005 5"/></svg></a>
+          <a href="https://www.facebook.com/" class="fsl fsl-social" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://www.youtube.com/" class="fsl fsl-social" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.47 8.6.47 8.6.47s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/><path d="M10 9.5l6.5 3.5-6.5 3.5v-7z"/></svg></a>
         </div>
       </div>
       <div class="fc"><h4>Services</h4><ul><li><a href="#services">Electrical Installation</a></li><li><a href="#services">Electrical Fittings</a></li><li><a href="#services">Appliances</a></li><li><a href="#services">Cables</a></li><li><a href="#services">Electric Fence</a></li><li><a href="#services">Fire &amp; Alarm</a></li><li><a href="#services">CCTV &amp; Security</a></li></ul></div>
       <div class="fc"><h4>Company</h4><ul><li><a href="#hero">Home</a></li><li><a href="#why">About Us</a></li><li><a href="#products">Products</a></li><li><a href="#projects">Projects</a></li><li><a href="#process">Our Process</a></li><li><a href="#testimonials">Reviews</a></li><li><a href="#contact">Get a Quote</a></li></ul></div>
       <div class="fc"><h4>Contact</h4>
         <div class="fci"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2"/></svg><span><a href="tel:0799762232">0799 762 232</a><br><a href="tel:0762748694">0762 748 694</a></span></div>
-        <div class="fci"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4"/><polyline points="22,6 12,13 2,6"/></svg><span><a href="/cdn-cgi/l/email-protection#84e0e1eaeaebece9f3e5f7b7b1c4e3e9e5ede8aae7ebe9"><span class="__cf_email__" data-cfemail="92f6f7fcfcfdfaffe5f3e1a1a7d2f5fff3fbfebcf1fdff">[email&#160;protected]</span></a></span></div>
+        <div class="fci"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4"/><polyline points="22,6 12,13 2,6"/></svg><span><a href="mailto:info@dmelectricals.com">info@dmelectricals.com</a></span></div>
         <div class="fci"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Mwihoko Road, Kasarani<br>Nairobi, Kenya</span></div>
         <div class="fci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Sat 7am–7pm | 24/7 Emergency</span></div>
       </div>
@@ -1044,7 +1084,7 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
 <a href="https://wa.me/254799762232" class="float-wa" target="_blank"><svg viewBox="0 0 24 24" fill="#fff" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // Year
 document.getElementById('yr').textContent = new Date().getFullYear();
 
@@ -1082,6 +1122,7 @@ document.querySelectorAll('.prod-img-bg').forEach(el => {
       appliances: 'linear-gradient(145deg,#0d0d1a,#1a1a3a,#2a2a5a)',
       lighting: 'linear-gradient(145deg,#1a1004,#3a2a08,#6b5010)',
       power: 'linear-gradient(145deg,#0d1a0d,#103010,#1a4a1a)',
+      smart: 'linear-gradient(145deg,#0d1420,#1a2535,#243044)',
     };
     card.style.background = fallbacks[cat] || 'linear-gradient(145deg,#111827,#1c2535)';
   };

@@ -161,6 +161,27 @@ PRODUCTS: list[tuple[str, str, str, str, list[str]]] = [
         ["Modern fittings and accessories for upgrades and new builds. We install across Nairobi and neighbouring areas.", "Contact via homepage."],
     ),
     (
+        "smart-switches-nairobi",
+        "Smart Switches Nairobi | DM Electricals",
+        "Wi‑Fi and Zigbee smart switches Nairobi",
+        "Smart touch and dimmer switches with app and voice control. Supply and installation in Nairobi. DM Electricals.",
+        ["Wi‑Fi / Zigbee switches for lighting scenes and automation. We supply and install across Nairobi.", "Enquire on the main site."],
+    ),
+    (
+        "smart-curtains-nairobi",
+        "Smart Curtains & Motorized Tracks Nairobi | DM Electricals",
+        "Motorized curtains and blinds Nairobi",
+        "Motorized curtain tracks and smart blinds — remote and timer control. DM Electricals Nairobi.",
+        ["Residential and commercial motorized window treatments. Installation across Nairobi.", "See homepage for contact."],
+    ),
+    (
+        "smart-locks-nairobi",
+        "Smart Door Locks Nairobi | DM Electricals",
+        "Fingerprint and app smart locks Nairobi",
+        "Digital smart locks — fingerprint, PIN, card, and app unlock. DM Electricals supply and install in Nairobi.",
+        ["Smart locks for homes and offices with audit trails. Nairobi-wide service.", "WhatsApp from main site."],
+    ),
+    (
         "mcbs-rcds-nairobi",
         "MCBs & RCDs Nairobi | DM Electricals",
         "MCB and RCD protection devices Nairobi",
