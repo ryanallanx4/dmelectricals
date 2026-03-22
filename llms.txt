@@ -2,25 +2,50 @@
 
 > Licensed electrical contractor in Nairobi, Kenya — installations, CCTV, electric fence, fire & alarm systems, emergency repairs, and electrical products. Based on Mwihoko Road, Kasarani.
 
-DM Electricals serves homes, businesses, and industrial clients across Nairobi with ERC-aligned work, transparent pricing, and 24/7 emergency response. This site is a single-page overview of services, products, projects, process, reviews, and contact options.
+DM Electricals serves homes, businesses, and industrial clients across Nairobi with ERC-aligned work, transparent pricing, and 24/7 emergency response. The main site is a full visual brochure; additional **SEO landing pages** cover each core service, product line, and service area with unique URLs (see sitemap).
 
 **Primary location:** Mwihoko Road, Kasarani, Nairobi, Kenya  
-**Service area:** Greater Nairobi and surrounding areas  
+**Service area:** Greater Nairobi, Kiambu/Ruiru (by arrangement)  
 **Phones:** +254 799 762 232 | +254 762 748 694 (Kenya)
 
 ## Site pages
 
 - [Home / full site](https://ryanallanx4.github.io/dmelectricals/): Complete HTML page — services, products catalogue, projects, testimonials, contact form, WhatsApp.
 
+## Service landing pages (Nairobi)
+
+- [Electrical & industrial installation](https://ryanallanx4.github.io/dmelectricals/services/electrical-industrial-installation-nairobi.html)
+- [Electrical fittings](https://ryanallanx4.github.io/dmelectricals/services/electrical-fittings-nairobi.html)
+- [Appliance installation](https://ryanallanx4.github.io/dmelectricals/services/appliances-installation-nairobi.html)
+- [Cables & wiring supplies](https://ryanallanx4.github.io/dmelectricals/services/electrical-cables-nairobi.html)
+- [Electric fence](https://ryanallanx4.github.io/dmelectricals/services/electric-fence-nairobi.html)
+- [Fire & alarm systems](https://ryanallanx4.github.io/dmelectricals/services/fire-alarm-systems-nairobi.html)
+- [CCTV & security](https://ryanallanx4.github.io/dmelectricals/services/cctv-security-nairobi.html)
+- [Wiring & rewiring](https://ryanallanx4.github.io/dmelectricals/services/wiring-rewiring-nairobi.html)
+- [24/7 emergency electrician](https://ryanallanx4.github.io/dmelectricals/services/emergency-electrician-nairobi.html)
+
+## Area landing pages
+
+- [Electrician Kasarani / Mwihoko Road](https://ryanallanx4.github.io/dmelectricals/areas/electrician-kasarani-nairobi.html)
+- [Electrician Westlands](https://ryanallanx4.github.io/dmelectricals/areas/electrician-westlands-nairobi.html)
+- [Nairobi County coverage](https://ryanallanx4.github.io/dmelectricals/areas/electrical-services-nairobi-county.html)
+- [Kiambu & Ruiru](https://ryanallanx4.github.io/dmelectricals/areas/electrical-contractor-kiambu-ruiru.html)
+
+## Product pages (sample — full list in sitemap)
+
+- [CCTV IP systems Nairobi](https://ryanallanx4.github.io/dmelectricals/products/cctv-ip-systems-nairobi.html)
+- [Solar panels & inverters](https://ryanallanx4.github.io/dmelectricals/products/solar-panels-inverters-nairobi.html)
+- [UPS systems](https://ryanallanx4.github.io/dmelectricals/products/ups-systems-nairobi.html)
+
 ## Machine-readable summary
 
-- [Plain summary (Markdown)](https://ryanallanx4.github.io/dmelectricals/index.html.md): Same information in compact Markdown for LLM context.
+- [Plain summary (Markdown)](https://ryanallanx4.github.io/dmelectricals/index.html.md): Compact Markdown for LLM context.
 
 ## Discovery & indexing
 
-- [Sitemap](https://ryanallanx4.github.io/dmelectricals/sitemap.xml): XML sitemap for search engines.
+- [Sitemap (all URLs)](https://ryanallanx4.github.io/dmelectricals/sitemap.xml): XML sitemap — homepage, every service, product, and area page.
 - [Robots](https://ryanallanx4.github.io/dmelectricals/robots.txt): Crawl directives for bots and AI agents.
 
 ## Optional
 
-- [GitHub repository](https://github.com/ryanallanx4/dmelectricals): Source hosting (developer context).
+- [GitHub repository](https://github.com/ryanallanx4/dmelectricals): Source hosting. Regenerate SEO pages: `py -3 scripts/generate_seo_pages.py`
