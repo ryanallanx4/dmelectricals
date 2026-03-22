@@ -1,9 +1,7 @@
-# dmelectricals
+# DM Electricals
 
-**Repository:** [github.com/ryanallanx4/dmelectricals](https://github.com/ryanallanx4/dmelectricals)
+Website for DM Electricals (Mwihoko Road, Nairobi).
 
-Local project for DM Electricals.
+**Live site (GitHub Pages):** [ryanallanx4.github.io/dmelectricals](https://ryanallanx4.github.io/dmelectricals/)
 
-## Setup
-
-This repository was initialized locally. Add your application code, dependencies, and build instructions here as the project grows.
+The published page is the static site at the repo root (`index.html`).
