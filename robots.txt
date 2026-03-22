@@ -1,0 +1,71 @@
+# https://ryanallanx4.github.io/dmelectricals/
+# UTF-8 | Crawl-friendly defaults for search engines and AI agents
+
+User-agent: *
+Allow: /
+
+# Google Search / Discover
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
+# Bing / Microsoft
+User-agent: Bingbot
+Allow: /
+
+# AI / LLM crawlers — Allow: public marketing site (revise to Disallow if you restrict training)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Block nothing on this single-page static site; add paths here if you add /admin/ etc.
+# Disallow: /private/
+
+# Sitemap for Google Search Console & other crawlers
+Sitemap: https://ryanallanx4.github.io/dmelectricals/sitemap.xml

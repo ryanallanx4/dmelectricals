@@ -1,0 +1,26 @@
+# DM Electricals & Installation
+
+> Licensed electrical contractor in Nairobi, Kenya — installations, CCTV, electric fence, fire & alarm systems, emergency repairs, and electrical products. Based on Mwihoko Road, Kasarani.
+
+DM Electricals serves homes, businesses, and industrial clients across Nairobi with ERC-aligned work, transparent pricing, and 24/7 emergency response. This site is a single-page overview of services, products, projects, process, reviews, and contact options.
+
+**Primary location:** Mwihoko Road, Kasarani, Nairobi, Kenya  
+**Service area:** Greater Nairobi and surrounding areas  
+**Phones:** +254 799 762 232 | +254 762 748 694 (Kenya)
+
+## Site pages
+
+- [Home / full site](https://ryanallanx4.github.io/dmelectricals/): Complete HTML page — services, products catalogue, projects, testimonials, contact form, WhatsApp.
+
+## Machine-readable summary
+
+- [Plain summary (Markdown)](https://ryanallanx4.github.io/dmelectricals/index.html.md): Same information in compact Markdown for LLM context.
+
+## Discovery & indexing
+
+- [Sitemap](https://ryanallanx4.github.io/dmelectricals/sitemap.xml): XML sitemap for search engines.
+- [Robots](https://ryanallanx4.github.io/dmelectricals/robots.txt): Crawl directives for bots and AI agents.
+
+## Optional
+
+- [GitHub repository](https://github.com/ryanallanx4/dmelectricals): Source hosting (developer context).

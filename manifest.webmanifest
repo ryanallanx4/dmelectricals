@@ -1,0 +1,12 @@
+{
+  "name": "DM Electricals \u0026 Installation",
+  "short_name": "DM Electricals",
+  "description": "Licensed electricians in Nairobi — Mwihoko Road, Kasarani. Installations, CCTV, alarms, emergencies.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#F8F8F8",
+  "theme_color": "#8B1A2E",
+  "lang": "en-KE",
+  "dir": "ltr"
+}

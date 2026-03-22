@@ -1,0 +1,13 @@
+/* TEAM */
+Owner: DM Electricals & Installation
+Location: Mwihoko Road, Kasarani, Nairobi, Kenya
+Site: https://ryanallanx4.github.io/dmelectricals/
+
+/* SITE */
+Last update: 2026/03/22
+Standards: HTML5, CSS3
+IDE: Cursor
+
+/* THANKS */
+Fonts: Google Fonts (Plus Jakarta Sans)
+Images: Unsplash (product imagery)
