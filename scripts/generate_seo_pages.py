@@ -11,7 +11,7 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = "https://ryanallanx4.github.io/dmelectricals"
+BASE = "https://dmelectricals.com"
 TODAY = date.today().isoformat()
 
 # (slug, title, h1, meta description, body paragraphs)
@@ -468,7 +468,7 @@ def write_sitemap(urls: list[str]) -> None:
         lines.append(f"    <loc>{escape(u)}</loc>")
         lines.append(f"    <lastmod>{TODAY}</lastmod>")
         lines.append("    <changefreq>weekly</changefreq>")
-        prio = "1.0" if u.rstrip("/").endswith("dmelectricals") else "0.85"
+        prio = "1.0" if u.rstrip("/") == BASE else "0.85"
         lines.append(f"    <priority>{prio}</priority>")
         lines.append("  </url>")
     lines.append("</urlset>")

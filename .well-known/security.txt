@@ -1,5 +1,5 @@
 # RFC 9116 — https://www.rfc-editor.org/rfc/rfc9116
-Contact: https://ryanallanx4.github.io/dmelectricals/#contact
+Contact: https://dmelectricals.com/#contact
 Expires: 2027-12-31T23:59:59.000Z
 Preferred-Languages: en
-Canonical: https://ryanallanx4.github.io/dmelectricals/.well-known/security.txt
+Canonical: https://dmelectricals.com/.well-known/security.txt

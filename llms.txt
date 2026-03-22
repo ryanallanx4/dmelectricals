@@ -10,41 +10,41 @@ DM Electricals serves homes, businesses, and industrial clients across Nairobi w
 
 ## Site pages
 
-- [Home / full site](https://ryanallanx4.github.io/dmelectricals/): Complete HTML page — services, products catalogue, projects, testimonials, contact form, WhatsApp.
+- [Home / full site](https://dmelectricals.com/): Complete HTML page — services, products catalogue, projects, testimonials, contact form, WhatsApp.
 
 ## Service landing pages (Nairobi)
 
-- [Electrical & industrial installation](https://ryanallanx4.github.io/dmelectricals/services/electrical-industrial-installation-nairobi.html)
-- [Electrical fittings](https://ryanallanx4.github.io/dmelectricals/services/electrical-fittings-nairobi.html)
-- [Appliance installation](https://ryanallanx4.github.io/dmelectricals/services/appliances-installation-nairobi.html)
-- [Cables & wiring supplies](https://ryanallanx4.github.io/dmelectricals/services/electrical-cables-nairobi.html)
-- [Electric fence](https://ryanallanx4.github.io/dmelectricals/services/electric-fence-nairobi.html)
-- [Fire & alarm systems](https://ryanallanx4.github.io/dmelectricals/services/fire-alarm-systems-nairobi.html)
-- [CCTV & security](https://ryanallanx4.github.io/dmelectricals/services/cctv-security-nairobi.html)
-- [Wiring & rewiring](https://ryanallanx4.github.io/dmelectricals/services/wiring-rewiring-nairobi.html)
-- [24/7 emergency electrician](https://ryanallanx4.github.io/dmelectricals/services/emergency-electrician-nairobi.html)
+- [Electrical & industrial installation](https://dmelectricals.com/services/electrical-industrial-installation-nairobi.html)
+- [Electrical fittings](https://dmelectricals.com/services/electrical-fittings-nairobi.html)
+- [Appliance installation](https://dmelectricals.com/services/appliances-installation-nairobi.html)
+- [Cables & wiring supplies](https://dmelectricals.com/services/electrical-cables-nairobi.html)
+- [Electric fence](https://dmelectricals.com/services/electric-fence-nairobi.html)
+- [Fire & alarm systems](https://dmelectricals.com/services/fire-alarm-systems-nairobi.html)
+- [CCTV & security](https://dmelectricals.com/services/cctv-security-nairobi.html)
+- [Wiring & rewiring](https://dmelectricals.com/services/wiring-rewiring-nairobi.html)
+- [24/7 emergency electrician](https://dmelectricals.com/services/emergency-electrician-nairobi.html)
 
 ## Area landing pages
 
-- [Electrician Kasarani / Mwihoko Road](https://ryanallanx4.github.io/dmelectricals/areas/electrician-kasarani-nairobi.html)
-- [Electrician Westlands](https://ryanallanx4.github.io/dmelectricals/areas/electrician-westlands-nairobi.html)
-- [Nairobi County coverage](https://ryanallanx4.github.io/dmelectricals/areas/electrical-services-nairobi-county.html)
-- [Kiambu & Ruiru](https://ryanallanx4.github.io/dmelectricals/areas/electrical-contractor-kiambu-ruiru.html)
+- [Electrician Kasarani / Mwihoko Road](https://dmelectricals.com/areas/electrician-kasarani-nairobi.html)
+- [Electrician Westlands](https://dmelectricals.com/areas/electrician-westlands-nairobi.html)
+- [Nairobi County coverage](https://dmelectricals.com/areas/electrical-services-nairobi-county.html)
+- [Kiambu & Ruiru](https://dmelectricals.com/areas/electrical-contractor-kiambu-ruiru.html)
 
 ## Product pages (sample — full list in sitemap)
 
-- [CCTV IP systems Nairobi](https://ryanallanx4.github.io/dmelectricals/products/cctv-ip-systems-nairobi.html)
-- [Solar panels & inverters](https://ryanallanx4.github.io/dmelectricals/products/solar-panels-inverters-nairobi.html)
-- [UPS systems](https://ryanallanx4.github.io/dmelectricals/products/ups-systems-nairobi.html)
+- [CCTV IP systems Nairobi](https://dmelectricals.com/products/cctv-ip-systems-nairobi.html)
+- [Solar panels & inverters](https://dmelectricals.com/products/solar-panels-inverters-nairobi.html)
+- [UPS systems](https://dmelectricals.com/products/ups-systems-nairobi.html)
 
 ## Machine-readable summary
 
-- [Plain summary (Markdown)](https://ryanallanx4.github.io/dmelectricals/index.html.md): Compact Markdown for LLM context.
+- [Plain summary (Markdown)](https://dmelectricals.com/index.html.md): Compact Markdown for LLM context.
 
 ## Discovery & indexing
 
-- [Sitemap (all URLs)](https://ryanallanx4.github.io/dmelectricals/sitemap.xml): XML sitemap — homepage, every service, product, and area page.
-- [Robots](https://ryanallanx4.github.io/dmelectricals/robots.txt): Crawl directives for bots and AI agents.
+- [Sitemap (all URLs)](https://dmelectricals.com/sitemap.xml): XML sitemap — homepage, every service, product, and area page.
+- [Robots](https://dmelectricals.com/robots.txt): Crawl directives for bots and AI agents.
 
 ## Optional
 

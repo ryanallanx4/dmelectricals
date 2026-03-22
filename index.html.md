@@ -26,4 +26,4 @@ DM Electricals provides electrical and industrial installation, fittings, applia
 
 ## Canonical URL
 
-https://ryanallanx4.github.io/dmelectricals/
+https://dmelectricals.com/

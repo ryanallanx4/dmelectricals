@@ -1,4 +1,4 @@
-# https://ryanallanx4.github.io/dmelectricals/
+# https://dmelectricals.com/
 # UTF-8 | Crawl-friendly defaults for search engines and AI agents
 
 User-agent: *
@@ -68,4 +68,4 @@ Allow: /
 # Disallow: /private/
 
 # Sitemap for Google Search Console & other crawlers
-Sitemap: https://ryanallanx4.github.io/dmelectricals/sitemap.xml
+Sitemap: https://dmelectricals.com/sitemap.xml
