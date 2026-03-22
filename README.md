@@ -1,5 +1,7 @@
 # dmelectricals
 
+**Repository:** [github.com/ryanallanx4/dmelectricals](https://github.com/ryanallanx4/dmelectricals)
+
 Local project for DM Electricals.
 
 ## Setup
