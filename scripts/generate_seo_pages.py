@@ -433,6 +433,10 @@ def page_html(path_from_root: str, title: str, h1: str, meta: str, paras: list[s
 <meta name="description" content="{escape(meta)}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" type="image/svg+xml" href="{BASE}/favicon.svg">
+<link rel="icon" type="image/x-icon" href="{BASE}/favicon.ico" sizes="48x48 32x32 16x16">
+<link rel="shortcut icon" href="{BASE}/favicon.ico">
+<link rel="apple-touch-icon" href="{BASE}/favicon.ico">
 <style>
 body{{font-family:system-ui,-apple-system,sans-serif;line-height:1.65;max-width:720px;margin:0 auto;padding:2rem 1.25rem;color:#111827;background:#F8F8F8}}
 a{{color:#8B1A2E;font-weight:600}}
