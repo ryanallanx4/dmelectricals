@@ -120,9 +120,12 @@ a{text-decoration:none;color:inherit;}
 .container{max-width:1260px;margin:0 auto;padding:0 32px;}
 /* animations removed for stability */
 
-/* ===== CIRCUIT CANVAS (dark sections bg) ===== */
-.circuit-bg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.circuit-bg canvas{position:absolute;inset:0;width:100%;height:100%;}
+/* ===== PCB CANVAS (dark sections — cyan traces + electrons) ===== */
+.circuit-bg{
+  position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;
+  background:radial-gradient(ellipse 75% 65% at 50% 48%, rgba(10,14,26,0.2) 0%, rgba(6,10,20,0.85) 55%, rgba(4,8,18,0.95) 100%);
+}
+.circuit-bg canvas{position:absolute;inset:0;width:100%;height:100%;opacity:1;}
 .section-content{position:relative;z-index:1;}
 
 /* ===== TOPBAR ===== */
@@ -1307,147 +1310,264 @@ function waProduct(name){
 // Form
 function doForm(){const fn=document.getElementById('fn').value,ph=document.getElementById('ph').value;if(!fn||!ph){alert('Please enter your name and phone number.');return;}document.getElementById('fsucc').style.display='block';const btn=document.querySelector('.cform .btn-filled');btn.disabled=true;btn.textContent='✓ Request Sent!';}
 
-// ===== CIRCUIT BOARD ANIMATION =====
-function initCircuit(canvasId, color) {
+// ===== PCB trace animation (minimal — orthogonal traces, electrons follow graph) =====
+function initPcbCanvas(canvasId) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function resize() {
-    canvas.width = canvas.parentElement.offsetWidth;
-    canvas.height = canvas.parentElement.offsetHeight;
+  const TRACE = 'rgba(34, 211, 238, 0.11)';
+  const TRACE_HI = 'rgba(56, 189, 248, 0.18)';
+  const NODE = 'rgba(103, 232, 249, 0.22)';
+  const ELEC = '#67e8f9';
+  const ELEC_CORE = '#ecfeff';
+
+  let segments = [];
+  let adjacency = new Map();
+  let electrons = [];
+  let nodeSet = new Map();
+
+  function nk(gx, gy) {
+    return gx + ',' + gy;
   }
-  resize();
-  window.addEventListener('resize', resize);
 
-  // Build a grid of nodes
-  const gridW = 18, gridH = 12;
-  const nodes = [];
-  const pulses = [];
+  function eq(a, b) {
+    return a.gx === b.gx && a.gy === b.gy;
+  }
 
-  function buildGrid() {
-    nodes.length = 0;
-    const cw = canvas.width, ch = canvas.height;
-    const cellW = cw / gridW, cellH = ch / gridH;
-    for (let r = 0; r <= gridH; r++) {
-      for (let c = 0; c <= gridW; c++) {
-        // Add slight random offset for organic look
-        nodes.push({
-          x: c * cellW + (Math.random() - 0.5) * cellW * 0.3,
-          y: r * cellH + (Math.random() - 0.5) * cellH * 0.3,
-          row: r, col: c
+  function build() {
+    const w = canvas.width;
+    const h = canvas.height;
+    const cell = Math.max(22, Math.min(32, Math.floor(Math.min(w, h) / 14)));
+    const gridW = Math.max(8, Math.floor(w / cell));
+    const gridH = Math.max(6, Math.floor(h / cell));
+    const cellW = w / gridW;
+    const cellH = h / gridH;
+
+    nodeSet.clear();
+    for (let gy = 0; gy <= gridH; gy++) {
+      for (let gx = 0; gx <= gridW; gx++) {
+        const node = { gx, gy, x: gx * cellW, y: gy * cellH };
+        nodeSet.set(nk(gx, gy), node);
+      }
+    }
+
+    segments = [];
+    const cx = w * 0.5;
+    const cy = h * 0.5;
+
+    for (let gy = 0; gy <= gridH; gy++) {
+      for (let gx = 0; gx <= gridW; gx++) {
+        const nx = gx * cellW + cellW * 0.5;
+        const ny = gy * cellH + cellH * 0.5;
+        const edgeX = Math.pow(Math.abs(nx - cx) / (w * 0.5), 1.1);
+        const edgeY = Math.pow(Math.abs(ny - cy) / (h * 0.5), 1.05);
+        const edgeBias = Math.min(1, (edgeX + edgeY) * 0.55);
+        const voidCore = 1 - Math.min(1, Math.hypot((nx - cx) / (w * 0.42), (ny - cy) / (h * 0.42)));
+
+        if (gx < gridW) {
+          const skip = 0.72 - edgeBias * 0.38 - voidCore * 0.28 + (Math.random() - 0.5) * 0.08;
+          if (Math.random() > skip) {
+            const a = nodeSet.get(nk(gx, gy));
+            const b = nodeSet.get(nk(gx + 1, gy));
+            segments.push({ a, b });
+          }
+        }
+        if (gy < gridH) {
+          const skip = 0.74 - edgeBias * 0.36 - voidCore * 0.26 + (Math.random() - 0.5) * 0.08;
+          if (Math.random() > skip) {
+            const a = nodeSet.get(nk(gx, gy));
+            const b = nodeSet.get(nk(gx, gy + 1));
+            segments.push({ a, b });
+          }
+        }
+        /* Sparse 45° diagonals (classic PCB style) — mostly near frame edges */
+        if (gx < gridW && gy < gridH && edgeBias > 0.35 && voidCore < 0.55) {
+          if (Math.random() > 0.965) {
+            const a = nodeSet.get(nk(gx, gy));
+            const b = nodeSet.get(nk(gx + 1, gy + 1));
+            segments.push({ a, b });
+          }
+        }
+      }
+    }
+
+    adjacency = new Map();
+    segments.forEach((seg) => {
+      const ka = nk(seg.a.gx, seg.a.gy);
+      const kb = nk(seg.b.gx, seg.b.gy);
+      if (!adjacency.has(ka)) adjacency.set(ka, []);
+      if (!adjacency.has(kb)) adjacency.set(kb, []);
+      adjacency.get(ka).push({ node: seg.b, seg });
+      adjacency.get(kb).push({ node: seg.a, seg });
+    });
+
+    electrons = [];
+    if (!reduce && segments.length) {
+      const nEl = Math.min(7, Math.max(3, Math.floor((segments.length / 100) + 3)));
+      for (let i = 0; i < nEl; i++) {
+        const seg = segments[Math.floor(Math.random() * segments.length)];
+        electrons.push({
+          seg,
+          fromA: Math.random() > 0.5,
+          t: Math.random() * 0.85,
+          speed: 0.0014 + Math.random() * 0.0016,
+          trail: []
         });
       }
     }
   }
-  buildGrid();
 
-  // Generate paths: horizontal and vertical segments
-  const segments = [];
-  for (let r = 0; r <= gridH; r++) {
-    for (let c = 0; c <= gridW; c++) {
-      const idx = r * (gridW + 1) + c;
-      // horizontal
-      if (c < gridW && Math.random() > 0.35) {
-        segments.push({ a: nodes[idx], b: nodes[idx + 1], type: 'h' });
-      }
-      // vertical
-      if (r < gridH && Math.random() > 0.4) {
-        segments.push({ a: nodes[idx], b: nodes[idx + (gridW + 1)], type: 'v' });
-      }
+  function endNode(e) {
+    return e.fromA ? e.seg.b : e.seg.a;
+  }
+
+  function pickNext(node, prevSeg) {
+    const list = adjacency.get(nk(node.gx, node.gy));
+    if (!list || !list.length) return null;
+    const filtered = list.filter((x) => x.seg !== prevSeg);
+    const pool = filtered.length ? filtered : list;
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    if (eq(pick.seg.a, node)) return { seg: pick.seg, fromA: true };
+    return { seg: pick.seg, fromA: false };
+  }
+
+  function posOn(e) {
+    const t = e.fromA ? e.t : 1 - e.t;
+    const s = e.seg;
+    return {
+      x: s.a.x + (s.b.x - s.a.x) * t,
+      y: s.a.y + (s.b.y - s.a.y) * t
+    };
+  }
+
+  function stepElectron(e) {
+    e.t += e.speed;
+    if (e.t < 1) return;
+    const over = e.t - 1;
+    const node = endNode(e);
+    const next = pickNext(node, e.seg);
+    if (!next) {
+      e.t = 0;
+      return;
     }
+    e.seg = next.seg;
+    e.fromA = next.fromA;
+    e.t = Math.min(over * 0.85, 0.92);
   }
 
-  // Spawn a pulse on a random segment
-  function spawnPulse() {
-    if (segments.length === 0) return;
-    const seg = segments[Math.floor(Math.random() * segments.length)];
-    pulses.push({
-      seg,
-      t: 0,
-      speed: 0.004 + Math.random() * 0.006,
-      size: 1.5 + Math.random() * 2.5,
-      alpha: 0.6 + Math.random() * 0.4,
-      trail: []
+  function resize() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+    build();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function drawBg() {
+    const w = canvas.width;
+    const h = canvas.height;
+    const r = Math.max(w, h) * 0.72;
+    const g = ctx.createRadialGradient(w * 0.5, h * 0.48, 0, w * 0.5, h * 0.48, r);
+    g.addColorStop(0, 'rgba(7, 11, 22, 0.15)');
+    g.addColorStop(0.42, 'rgba(5, 9, 18, 0.45)');
+    g.addColorStop(1, 'rgba(3, 6, 14, 0.65)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  function drawTraces() {
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    segments.forEach((seg) => {
+      ctx.strokeStyle = TRACE;
+      ctx.lineWidth = 0.55;
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = 'rgba(34, 211, 238, 0.35)';
+      ctx.shadowBlur = 3;
+      ctx.beginPath();
+      ctx.moveTo(seg.a.x, seg.a.y);
+      ctx.lineTo(seg.b.x, seg.b.y);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
     });
-  }
-
-  let frame = 0;
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw static grid lines very faint
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 0.4;
-    segments.forEach(seg => {
-      ctx.globalAlpha = 0.06;
+    ctx.strokeStyle = TRACE_HI;
+    ctx.lineWidth = 0.35;
+    ctx.globalAlpha = 0.55;
+    segments.forEach((seg) => {
       ctx.beginPath();
       ctx.moveTo(seg.a.x, seg.a.y);
       ctx.lineTo(seg.b.x, seg.b.y);
       ctx.stroke();
     });
+    ctx.globalAlpha = 1;
+  }
 
-    // Draw node dots
-    nodes.forEach(n => {
-      if (Math.random() > 0.98) { // flicker
-        ctx.globalAlpha = 0.12;
-        ctx.fillStyle = color;
+  function drawNodes() {
+    const drawn = new Set();
+    segments.forEach((seg) => {
+      [seg.a, seg.b].forEach((n) => {
+        const key = nk(n.gx, n.gy);
+        if (drawn.has(key)) return;
+        drawn.add(key);
+        const deg = (adjacency.get(key) || []).length;
+        if (deg < 2) return;
+        ctx.fillStyle = NODE;
+        ctx.globalAlpha = 0.5;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, 1.2, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, deg > 3 ? 1.6 : 1.15, 0, Math.PI * 2);
         ctx.fill();
-      }
+        ctx.globalAlpha = 1;
+      });
     });
+  }
 
-    // Draw pulses
-    pulses.forEach((p, i) => {
-      p.t += p.speed;
-      const x = p.seg.a.x + (p.seg.b.x - p.seg.a.x) * p.t;
-      const y = p.seg.a.y + (p.seg.b.y - p.seg.a.y) * p.t;
-
-      // Trail
-      p.trail.push({ x, y });
-      if (p.trail.length > 14) p.trail.shift();
-
-      p.trail.forEach((pt, ti) => {
-        const tr = (ti + 1) / p.trail.length;
-        ctx.globalAlpha = tr * p.alpha * 0.5;
-        ctx.fillStyle = color;
+  function drawElectrons() {
+    electrons.forEach((e) => {
+      stepElectron(e);
+      const p = posOn(e);
+      e.trail.push({ x: p.x, y: p.y });
+      if (e.trail.length > 10) e.trail.shift();
+      e.trail.forEach((pt, ti) => {
+        const tr = (ti + 1) / e.trail.length;
+        ctx.globalAlpha = tr * 0.35;
+        ctx.fillStyle = ELEC;
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, p.size * tr * 0.8, 0, Math.PI * 2);
+        ctx.arc(pt.x, pt.y, 1.1 * tr, 0, Math.PI * 2);
         ctx.fill();
       });
-
-      // Glow head
-      ctx.globalAlpha = p.alpha;
-      ctx.shadowColor = color;
-      ctx.shadowBlur = 8;
-      ctx.fillStyle = color;
+      ctx.globalAlpha = 0.95;
+      ctx.shadowColor = 'rgba(103, 232, 249, 0.9)';
+      ctx.shadowBlur = 10;
+      ctx.fillStyle = ELEC;
       ctx.beginPath();
-      ctx.arc(x, y, p.size, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = ELEC_CORE;
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 0.9, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 0;
       ctx.globalAlpha = 1;
-
-      if (p.t >= 1) pulses.splice(i, 1);
     });
-
-    // Spawn new pulses at intervals
-    frame++;
-    if (frame % 18 === 0) spawnPulse();
-    if (frame % 45 === 0) spawnPulse(); // double spawn occasionally
-    if (pulses.length < 6) spawnPulse();
-
-    requestAnimationFrame(draw);
   }
-  draw();
+
+  function frame() {
+    drawBg();
+    drawTraces();
+    drawNodes();
+    if (!reduce) drawElectrons();
+    requestAnimationFrame(frame);
+  }
+  frame();
 }
 
-// Init circuit animations —
-// maroon/rose color on navy backgrounds
 window.addEventListener('load', () => {
-  initCircuit('circuitCanvas1', '#e8667a');
-  initCircuit('circuitCanvas2', '#e8667a');
-  initCircuit('circuitCanvas3', '#A8243C');
+  initPcbCanvas('circuitCanvas1');
+  initPcbCanvas('circuitCanvas2');
+  initPcbCanvas('circuitCanvas3');
 });
 </script>
 </body>
