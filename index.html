@@ -206,6 +206,28 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(248,248,248,0.93);backdro
 .wa-dot{position:absolute;bottom:14px;right:14px;width:36px;height:36px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(37,211,102,0.4);cursor:pointer;transition:transform 0.2s;}
 .wa-dot:hover{transform:scale(1.1);}
 
+/* Hero — rotating product showcases (same imagery as #products) */
+.hero-show{position:relative;overflow:hidden;border-radius:inherit;isolation:isolate;}
+.hero-show--main{height:440px;min-height:440px;}
+.hero-show--sm{height:200px;min-height:200px;}
+.hero-show--inspire{height:118px;min-height:118px;margin-bottom:12px;border-radius:14px;}
+.hero-slides{position:absolute;inset:0;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 0.85s cubic-bezier(0.25,0.46,0.45,0.94);z-index:0;}
+.hero-slide.active{opacity:1;z-index:1;}
+.hero-slide-bg{position:absolute;inset:-4%;width:108%;height:108%;background-size:cover;background-position:center;transform:scale(1.08);transition:transform 7.5s cubic-bezier(0.22,1,0.36,1);}
+.hero-slide.active .hero-slide-bg{transform:scale(1);}
+.hero-slide-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,10,18,0.88) 0%,rgba(17,24,39,0.4) 55%,rgba(17,24,39,0.12) 100%);pointer-events:none;}
+a.hero-card-link.h-card{display:block;color:inherit;text-decoration:none;cursor:pointer;transition:transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 0.35s;}
+a.hero-card-link.h-card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,0.22);}
+a.hero-card-link.h-card:focus-visible{outline:2px solid var(--maroon-light);outline-offset:3px;}
+.hero-glass{position:absolute;bottom:14px;left:14px;right:14px;z-index:5;}
+.hero-glass .gl-label,.hero-glass .gl-sub{transition:opacity 0.4s ease, transform 0.4s ease;}
+.inspire .insp-sub{min-height:2.6em;transition:opacity 0.45s ease;}
+@media(prefers-reduced-motion:reduce){
+  .hero-slide{transition:none;}
+  .hero-slide-bg{transition:none !important;transform:scale(1) !important;}
+}
+
 /* ===== TICKER ===== */
 .ticker-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;background:#ffffff;overflow:hidden;}
 .ticker-track{display:flex;gap:56px;animation:tickAnim 32s linear infinite;white-space:nowrap;}
@@ -337,6 +359,11 @@ nav{position:sticky;top:0;z-index:1000;background:rgba(248,248,248,0.93);backdro
 .prod-card:hover .prod-icon-badge{background:rgba(139,26,46,0.4);border-color:rgba(168,36,60,0.4);}
 .prod-icon-badge svg{width:16px;height:16px;stroke:rgba(255,255,255,0.6);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.3s;}
 .prod-card:hover .prod-icon-badge svg{stroke:#e8667a;}
+#prodGrid .prod-card{opacity:0;transform:translateY(22px);transition:opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);transition-delay:calc(var(--stagger, 0) * 38ms);}
+#prodGrid.prod-grid--inview .prod-card{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  #prodGrid .prod-card{opacity:1;transform:none;transition:none;}
+}
 
 /* ===== WHY ===== */
 #why{background:#111827;color:#fff;position:relative;overflow:hidden;}
@@ -592,20 +619,106 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
       </div>
     </div>
     <div class="hero-right">
-      <div class="h-card h-card-main">
-        <div class="h-img" style="height:440px;"><div class="h-img-inner c1" style="height:440px;"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div></div>
-        <div class="glass-label"><div><div class="gl-label">Electrical Installation</div><div class="gl-sub">Mwihoko Road, Nairobi</div></div><div class="gl-arr">↗</div></div>
-      </div>
-      <div class="h-card">
-        <div class="h-img" style="height:200px;"><div class="h-img-inner c2" style="height:200px;"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg></div></div>
-        <div class="glass-label"><div><div class="gl-label">Security &amp; Alarms</div><div class="gl-sub">CCTV, Electric Fence</div></div><div class="gl-arr">↗</div></div>
-      </div>
+      <a href="#products" class="h-card h-card-main hero-card-link" aria-label="Browse wiring, fittings and smart products">
+        <div class="hero-show hero-show--main">
+          <div class="hero-slides" id="heroSlidesMain">
+            <div class="hero-slide active" data-label="PVC Armoured Cable" data-sub="Wiring &amp; Cables · same range as our shop">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-label="Flat Twin &amp; Earth" data-sub="Residential &amp; commercial wiring">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-label="MCB Consumer Units" data-sub="Distribution boards &amp; DBs">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&amp;q=80&amp;fit=crop&amp;crop=right')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-label="Switches &amp; Sockets" data-sub="Premium fittings &amp; USB options">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1545259742-2a3d8a9b8e6b?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-label="Smart Switch" data-sub="Wi‑Fi / Zigbee · scenes &amp; voice">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-label="LED Panels &amp; Downlights" data-sub="Efficient lighting for every room">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+          </div>
+          <div class="glass-label hero-glass">
+            <div>
+              <div class="gl-label" data-hero-label>PVC Armoured Cable</div>
+              <div class="gl-sub" data-hero-sub>Wiring &amp; Cables · same range as our shop</div>
+            </div>
+            <div class="gl-arr">↗</div>
+          </div>
+        </div>
+      </a>
+      <a href="#products" class="h-card hero-card-link" aria-label="Browse CCTV, alarms and security products">
+        <div class="hero-show hero-show--sm">
+          <div class="hero-slides" id="heroSlidesSecurity">
+            <div class="hero-slide active" data-label="CCTV IP Systems" data-sub="NVR kits · night vision">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-label="Electric Fence Energiser" data-sub="Perimeter security">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-label="Burglar Alarm Kits" data-sub="PIR, siren &amp; panel">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1558002038-1055e2dae1d7?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-label="Smoke &amp; Fire Panels" data-sub="Detection &amp; compliance">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+          </div>
+          <div class="glass-label hero-glass">
+            <div>
+              <div class="gl-label" data-hero-label>CCTV IP Systems</div>
+              <div class="gl-sub" data-hero-sub>NVR kits · night vision</div>
+            </div>
+            <div class="gl-arr">↗</div>
+          </div>
+        </div>
+      </a>
       <div class="inspire">
+        <div class="hero-show hero-show--inspire">
+          <div class="hero-slides" id="heroSlidesInspire">
+            <div class="hero-slide active" data-sub="Solar panels &amp; inverters — commercial &amp; residential">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-sub="Smart curtains &amp; lighting — automation done right">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1615529328331-f8917597711f?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-sub="CCTV estates &amp; retail — remote viewing">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-sub="Street &amp; pathway LED — compounds &amp; parking">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-sub="Smart locks &amp; access — homes &amp; offices">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+            <div class="hero-slide" data-sub="Industrial installs &amp; heavy cabling">
+              <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&amp;q=80')"></div>
+              <div class="hero-slide-shade"></div>
+            </div>
+          </div>
+        </div>
         <div class="insp-title">Get Inspired</div>
-        <div class="insp-sub">Browse our portfolio of electrical projects across Nairobi.</div>
+        <div class="insp-sub" id="heroInspireSub">Solar panels &amp; inverters — commercial &amp; residential</div>
         <a href="#projects" class="insp-link">Browse Projects →</a>
         <div class="insp-bolt"><svg width="88" height="88" viewBox="0 0 24 24" fill="#fff"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <a href="https://wa.me/254799762232" class="wa-dot" target="_blank"><svg viewBox="0 0 24 24" fill="#fff" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="https://wa.me/254799762232" class="wa-dot" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="#fff" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
       </div>
     </div>
   </div>
@@ -1132,6 +1245,55 @@ document.querySelectorAll('.prod-img-bg').forEach(el => {
   };
   img.src = url.replace(/url\(['"]?/, '').replace(/['"]?\)/, '');
 });
+
+// Hero product rotators (imagery aligned with #products)
+function initHeroRotor(slidesRoot, options) {
+  if (!slidesRoot) return;
+  const slides = slidesRoot.querySelectorAll('.hero-slide');
+  if (slides.length <= 1) return;
+  const heroShow = slidesRoot.closest('.hero-show');
+  const labelEl = options && Object.prototype.hasOwnProperty.call(options, 'labelEl') ? options.labelEl : (heroShow ? heroShow.querySelector('[data-hero-label]') : null);
+  const subEl = options && Object.prototype.hasOwnProperty.call(options, 'subEl') ? options.subEl : (heroShow ? heroShow.querySelector('[data-hero-sub]') : null);
+  let idx = 0;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function apply() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    const cur = slides[idx];
+    if (labelEl && cur.dataset.label) labelEl.textContent = cur.dataset.label;
+    if (subEl && cur.dataset.sub) subEl.textContent = cur.dataset.sub;
+  }
+  function next() {
+    idx = (idx + 1) % slides.length;
+    apply();
+  }
+  if (!reduce) setInterval(next, options && options.interval ? options.interval : 5200);
+}
+initHeroRotor(document.getElementById('heroSlidesMain'), { interval: 5400 });
+initHeroRotor(document.getElementById('heroSlidesSecurity'), { interval: 4800 });
+initHeroRotor(document.getElementById('heroSlidesInspire'), { interval: 5100, labelEl: null, subEl: document.getElementById('heroInspireSub') });
+
+// Product grid — staggered entrance (matches hero / product motion language)
+(function () {
+  const pg = document.getElementById('prodGrid');
+  if (!pg) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    pg.classList.add('prod-grid--inview');
+    return;
+  }
+  pg.querySelectorAll('.prod-card').forEach((c, i) => c.style.setProperty('--stagger', i));
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('prod-grid--inview');
+          io.disconnect();
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: '0px 0px -6% 0px' }
+  );
+  io.observe(pg);
+})();
 
 // Product filter
 function filterProd(cat,btn){document.querySelectorAll('.pcat').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.prod-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';});}
