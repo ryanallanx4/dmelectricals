@@ -1319,9 +1319,8 @@ function initPcbCanvas(canvasId) {
 
   const TRACE = 'rgba(34, 211, 238, 0.11)';
   const TRACE_HI = 'rgba(56, 189, 248, 0.18)';
-  const NODE = 'rgba(103, 232, 249, 0.22)';
-  const ELEC = '#67e8f9';
-  const ELEC_CORE = '#ecfeff';
+  const ELEC = '#a5f3fc';
+  const ELEC_CORE = '#ffffff';
 
   let segments = [];
   let adjacency = new Map();
@@ -1405,14 +1404,15 @@ function initPcbCanvas(canvasId) {
 
     electrons = [];
     if (!reduce && segments.length) {
-      const nEl = Math.min(7, Math.max(3, Math.floor((segments.length / 100) + 3)));
+      const nEl = Math.min(11, Math.max(5, Math.floor((segments.length / 70) + 4)));
       for (let i = 0; i < nEl; i++) {
         const seg = segments[Math.floor(Math.random() * segments.length)];
         electrons.push({
           seg,
           fromA: Math.random() > 0.5,
-          t: Math.random() * 0.85,
-          speed: 0.0014 + Math.random() * 0.0016,
+          t: Math.random() * 0.92,
+          /* t is 0–1 along segment; speed = fraction of segment per second (was ~0.09/s, looked static) */
+          speed: 0.22 + Math.random() * 0.2,
           trail: []
         });
       }
@@ -1442,19 +1442,20 @@ function initPcbCanvas(canvasId) {
     };
   }
 
-  function stepElectron(e) {
-    e.t += e.speed;
-    if (e.t < 1) return;
-    const over = e.t - 1;
-    const node = endNode(e);
-    const next = pickNext(node, e.seg);
-    if (!next) {
-      e.t = 0;
-      return;
+  function stepElectron(e, dtSec) {
+    e.t += e.speed * dtSec;
+    while (e.t >= 1) {
+      const over = e.t - 1;
+      const node = endNode(e);
+      const next = pickNext(node, e.seg);
+      if (!next) {
+        e.t = 0;
+        return;
+      }
+      e.seg = next.seg;
+      e.fromA = next.fromA;
+      e.t = over;
     }
-    e.seg = next.seg;
-    e.fromA = next.fromA;
-    e.t = Math.min(over * 0.85, 0.92);
   }
 
   function resize() {
@@ -1464,6 +1465,10 @@ function initPcbCanvas(canvasId) {
   }
   resize();
   window.addEventListener('resize', resize);
+  requestAnimationFrame(() => {
+    resize();
+  });
+  setTimeout(resize, 200);
 
   function drawBg() {
     const w = canvas.width;
@@ -1504,64 +1509,47 @@ function initPcbCanvas(canvasId) {
     ctx.globalAlpha = 1;
   }
 
-  function drawNodes() {
-    const drawn = new Set();
-    segments.forEach((seg) => {
-      [seg.a, seg.b].forEach((n) => {
-        const key = nk(n.gx, n.gy);
-        if (drawn.has(key)) return;
-        drawn.add(key);
-        const deg = (adjacency.get(key) || []).length;
-        if (deg < 2) return;
-        ctx.fillStyle = NODE;
-        ctx.globalAlpha = 0.5;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, deg > 3 ? 1.6 : 1.15, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      });
-    });
-  }
-
-  function drawElectrons() {
+  function drawElectrons(dtSec) {
     electrons.forEach((e) => {
-      stepElectron(e);
+      stepElectron(e, dtSec);
       const p = posOn(e);
       e.trail.push({ x: p.x, y: p.y });
-      if (e.trail.length > 10) e.trail.shift();
+      if (e.trail.length > 12) e.trail.shift();
       e.trail.forEach((pt, ti) => {
         const tr = (ti + 1) / e.trail.length;
-        ctx.globalAlpha = tr * 0.35;
+        ctx.globalAlpha = tr * 0.45;
         ctx.fillStyle = ELEC;
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, 1.1 * tr, 0, Math.PI * 2);
+        ctx.arc(pt.x, pt.y, 1.4 * tr, 0, Math.PI * 2);
         ctx.fill();
       });
-      ctx.globalAlpha = 0.95;
-      ctx.shadowColor = 'rgba(103, 232, 249, 0.9)';
-      ctx.shadowBlur = 10;
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = 'rgba(165, 243, 252, 0.95)';
+      ctx.shadowBlur = 14;
       ctx.fillStyle = ELEC;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 3.2, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = ELEC_CORE;
-      ctx.globalAlpha = 0.85;
+      ctx.globalAlpha = 0.95;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 0.9, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, 1.25, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 0;
       ctx.globalAlpha = 1;
     });
   }
 
-  function frame() {
+  let lastFrame = performance.now();
+  function frame(now) {
+    const dtSec = Math.min(0.05, Math.max(1 / 120, (now - lastFrame) / 1000));
+    lastFrame = now;
     drawBg();
     drawTraces();
-    drawNodes();
-    if (!reduce) drawElectrons();
+    if (!reduce) drawElectrons(dtSec);
     requestAnimationFrame(frame);
   }
-  frame();
+  requestAnimationFrame(frame);
 }
 
 window.addEventListener('load', () => {
