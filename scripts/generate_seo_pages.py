@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Generate SEO landing pages + sitemap.xml for DM Electricals static site."""
+"""Generate SEO landing pages + sitemap.xml for DM Electricals static site.
+
+Targets Nairobi/Kenya search patterns (electrician, fundi, rewiring, CCTV,
+electric fence, solar, emergency, neighbourhood names) and AI/overview-friendly
+FAQ + entity markup. Run: py -3 scripts/generate_seo_pages.py
+"""
 
 from __future__ import annotations
 
 import json
-import os
 from datetime import date
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -14,8 +18,12 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://dmelectricals.com"
 TODAY = date.today().isoformat()
 
+ServiceTuple = tuple[str, str, str, str, list[str]]
+AreaTuple = tuple[str, str, str, str, list[str]]
+ProductTuple = tuple[str, str, str, str, list[str]]
+
 # (slug, title, h1, meta description, body paragraphs)
-SERVICES: list[tuple[str, str, str, str, list[str]]] = [
+SERVICES: list[ServiceTuple] = [
     (
         "electrical-industrial-installation-nairobi",
         "Electrical & Industrial Installation Nairobi | DM Electricals",
@@ -23,7 +31,7 @@ SERVICES: list[tuple[str, str, str, str, list[str]]] = [
         "Full electrical and industrial installations for homes, offices, and factories across Nairobi. Licensed team, Kenya Power standards, Mwihoko Road, Kasarani. Get a quote.",
         [
             "DM Electricals delivers complete electrical and industrial installations for residential estates, commercial buildings, and manufacturing facilities throughout Nairobi County and surrounding areas. Every project is planned with load calculations, quality materials, and safe cable routing.",
-            "We work across Kasarani, Westlands, Ruaraka, Thika Road, Industrial Area, Roysambu, and the wider Nairobi region. Whether you need a new consumer unit, three-phase distribution, or full fit-out for a factory, our team follows ERC-aligned practices and clear documentation.",
+            "We work across Kasarani, Westlands, Ruaraka, Thika Road, Industrial Area, Roysambu, Embakasi, and the wider Nairobi region. Whether you need a new consumer unit, three-phase distribution, or full fit-out for a factory, our team follows ERC-aligned practices and clear documentation.",
             "Request a free site visit from our Mwihoko Road base: call 0799 762 232 or 0762 748 694, or use the contact form on our main website.",
         ],
     ),
@@ -67,7 +75,7 @@ SERVICES: list[tuple[str, str, str, str, list[str]]] = [
         "Perimeter electric fencing for homes, estates, and commercial plots in Nairobi. Energisers, earthing, alarms, and compliance. DM Electricals Kasarani.",
         [
             "Electric fence systems deter intrusion and integrate with sirens and alarms. DM Electricals designs, supplies, and installs energisers, high-tensile wire, earthing, and warning signage for compounds in Nairobi.",
-            "We have completed projects in Roysambu, Kasarani, Ruaraka, Thika Road corridors, and other residential and commercial locations across Nairobi.",
+            "We have completed projects in Roysambu, Kasarani, Ruaraka, Thika Road corridors, Karen, and other residential and commercial locations. Many clients search for an electric fence installer Nairobi — we provide full perimeter packages.",
             "Get a site assessment and quote — contact details and project gallery on our homepage.",
         ],
     ),
@@ -89,7 +97,7 @@ SERVICES: list[tuple[str, str, str, str, list[str]]] = [
         "CCTV and IP camera systems for homes, shops, and estates in Nairobi. Remote viewing, NVR, night vision. DM Electricals Kasarani.",
         [
             "We supply and install HD and IP CCTV systems with NVR/DVR recording, remote mobile access, and motion detection for homes, offices, retail, and estates across Nairobi.",
-            "Coverage includes Kasarani, Ruaraka, Westlands, Thika Road, Eastleigh, and apartment complexes across the city.",
+            "Coverage includes Kasarani, Ruaraka, Westlands, Thika Road, Eastleigh, South B, Embakasi, and apartment complexes across the city.",
             "See our portfolio and request a quote on the main DM Electricals website.",
         ],
     ),
@@ -110,14 +118,70 @@ SERVICES: list[tuple[str, str, str, str, list[str]]] = [
         "Emergency electrician — 24/7 in Nairobi",
         "Rapid response for tripped breakers, outages, short circuits, and electrical hazards in Nairobi. DM Electricals — emergency line 0799 762 232.",
         [
-            "Electrical emergencies can happen day or night. DM Electricals offers round-the-clock response for power failures, tripping breakers, burning smells, sparks, and dangerous faults across Nairobi.",
+            "Electrical emergencies can happen day or night. DM Electricals offers round-the-clock response for power failures, tripping breakers, burning smells, sparks, and dangerous faults across Nairobi. Customers often search emergency electrician near me Nairobi — we dispatch from our Kasarani base.",
             "Our team aims to attend emergency calls quickly — often within an hour depending on location and traffic — from Kasarani and throughout Nairobi.",
             "Save our numbers: 0799 762 232 and 0762 748 694. Full contact and WhatsApp on our main website.",
         ],
     ),
+    # —— Additional service pages (search-intent / GEO / AIO expansion) ——
+    (
+        "solar-electrical-installation-nairobi",
+        "Solar Electrical Installation Nairobi | Panels, Inverters & Integration | DM Electricals",
+        "Solar panels, inverters & electrical integration in Nairobi",
+        "Solar panel and hybrid inverter installation with correct AC/DC integration, earthing, and protection for Nairobi homes and businesses. DM Electricals Mwihoko Road, Kasarani.",
+        [
+            "Solar backup and grid-tie systems need safe electrical integration — string wiring, inverter locations, surge protection, and earthing. DM Electricals installs and commissions solar electrical works alongside quality solar components.",
+            "We support residential estates, schools, and commercial rooftops across Nairobi and greater Kiambu where schedules allow. Popular searches include solar installation Nairobi and inverter backup electrician.",
+            "Combine solar pages on our main site with this guide, then call 0799 762 232 or use the homepage WhatsApp for a site assessment.",
+        ],
+    ),
+    (
+        "generator-backup-electrical-nairobi",
+        "Generator & Backup Power Electrical Nairobi | Changeover & ATS | DM Electricals",
+        "Generator hookup, changeover switches & backup power in Nairobi",
+        "Generator electrical hookups, manual changeover, and ATS coordination for Nairobi properties. Safe earthing and Kenya Power–aware designs. DM Electricals.",
+        [
+            "Backup generators require correct changeover or automatic transfer, neutral-earth bonding rules, and cable sizing. DM Electricals installs generator feeds, interlocks, and distribution so mains and generator do not back-feed dangerously.",
+            "We serve homes, hotels, and light industrial clients across Nairobi County. Works hand-in-hand with our changeover and UPS product supply on the main website.",
+            "Request a load survey and quote via the main DM Electricals contact section.",
+        ],
+    ),
+    (
+        "electrical-fault-repairs-nairobi",
+        "Electrical Fault Finding & Repairs Nairobi | Sockets, Breakers | DM Electricals",
+        "Socket repair, tripping breakers & electrical fault finding in Nairobi",
+        "Affordable circuit repairs, socket replacements, and fault finding in Nairobi. Fix tripping breakers, partial power loss, and unsafe outlets. DM Electricals.",
+        [
+            "Many Nairobi searches are for a verified fundi for wiring Nairobi or socket repair — professional fault finding avoids repeated tripping and fire risk. DM Electricals traces earth faults, overloads, and damaged accessories.",
+            "We repair and replace sockets, lighting circuits, cooker outlets, and distribution faults for flats, houses, and shops in Kasarani, Westlands, Eastleigh, Embakasi, and county-wide.",
+            "Book a visit: 0799 762 232 / 0762 748 694 or WhatsApp from the homepage.",
+        ],
+    ),
+    (
+        "lighting-installation-nairobi",
+        "Lighting Installation Nairobi | LED, Outdoor & Security Lights | DM Electricals",
+        "Indoor & outdoor lighting installation in Nairobi",
+        "LED downlights, panel lights, outdoor floods, and pathway lighting installed across Nairobi. DM Electricals supply and fit.",
+        [
+            "From recessed LEDs to security floodlights and estate pathway lighting, we install energy-efficient lighting with correct switching and zones. Matches our LED and floodlight product pages.",
+            "We complete lighting upgrades for homes in Kilimani, Karen, South B, Parklands, and commercial fit-outs in Westlands and Upper Hill.",
+            "See the lighting products on our homepage and contact us for design and installation.",
+        ],
+    ),
+    (
+        "smart-home-electrical-nairobi",
+        "Smart Home Electrician Nairobi | Switches, Curtains & Locks | DM Electricals",
+        "Smart home electrical installation in Nairobi",
+        "Wi‑Fi and Zigbee smart switches, motorized curtains, and smart locks — installed by licensed electricians in Nairobi. DM Electricals.",
+        [
+            "Smart lighting and access control need neutral where required, proper loads, and network planning. DM Electricals installs smart switches, curtain motors, and digital locks for modern homes and offices.",
+            "Ideal for apartments in Kilimani, Lavington, Kileleshwa, and new builds along Ngong Road. Cross-links to our smart product landing pages.",
+            "Enquire via the main website catalogue or call our office lines.",
+        ],
+    ),
 ]
 
-PRODUCTS: list[tuple[str, str, str, str, list[str]]] = [
+PRODUCTS: list[ProductTuple] = [
     (
         "pvc-armoured-cable-nairobi",
         "PVC Armoured Cable Supply Nairobi | DM Electricals",
@@ -288,7 +352,7 @@ PRODUCTS: list[tuple[str, str, str, str, list[str]]] = [
     ),
 ]
 
-AREAS: list[tuple[str, str, str, str, list[str]]] = [
+AREAS: list[AreaTuple] = [
     (
         "electrician-kasarani-nairobi",
         "Electrician Kasarani | DM Electricals Mwihoko Road",
@@ -408,14 +472,199 @@ AREAS: list[tuple[str, str, str, str, list[str]]] = [
             "Our full service list, products, and testimonials are on the homepage.",
         ],
     ),
+    # High-intent neighbourhood / corridor pages
+    (
+        "electrician-embakasi-nairobi",
+        "Electrician Embakasi Nairobi | DM Electricals",
+        "Electrician in Embakasi — repairs, CCTV & wiring",
+        "Electrical installations, CCTV, rewiring, and emergency electrician in Embakasi, Nairobi. DM Electricals — 0799 762 232.",
+        [
+            "Embakasi and surrounding estates have high demand for reliable fundis and licensed electricians for sockets, lighting, water heaters, and security systems.",
+            "DM Electricals provides transparent quotes, ERC-aligned work, and support for both residential blocks and small businesses in Embakasi.",
+        ],
+    ),
+    (
+        "electrician-south-b-nairobi",
+        "Electrician South B Nairobi | DM Electricals",
+        "Electrician in South B — homes & apartments",
+        "Rewiring, appliance installation, CCTV, and fault repairs in South B, Nairobi. Call DM Electricals 0799 762 232.",
+        [
+            "South B and South C corridors are busy residential zones — we handle consumer unit upgrades, new lighting, and emergency call-outs.",
+            "Book a visit via our homepage or WhatsApp for same-week scheduling where capacity allows.",
+        ],
+    ),
+    (
+        "electrician-ngong-road-nairobi",
+        "Electrician Ngong Road Nairobi | DM Electricals",
+        "Electrical along Ngong Road & valley",
+        "Commercial and residential electrical work along Ngong Road — offices, apartments, restaurants. DM Electricals Nairobi.",
+        [
+            "Ngong Road hosts retail, hospitality, and residential developments that need compliant lighting, three-phase feeds, and backup integration.",
+            "DM Electricals coordinates site surveys and installation timelines with landlords and facilities teams.",
+        ],
+    ),
+    (
+        "electrician-upper-hill-nairobi",
+        "Electrician Upper Hill Nairobi | DM Electricals",
+        "Commercial electrical in Upper Hill",
+        "Office towers and institutions in Upper Hill — lighting, UPS, fire alarms, data power. DM Electricals.",
+        [
+            "Upper Hill is a dense commercial node; we support fit-outs, fire detection, and critical power for professional buildings.",
+            "Contact DM Electricals for tender-ready documentation and professional installation teams.",
+        ],
+    ),
+    (
+        "electrician-parklands-nairobi",
+        "Electrician Parklands Nairobi | DM Electricals",
+        "Electrical services in Parklands & Chiromo",
+        "Homes, schools, and clinics in Parklands — wiring, lighting upgrades, alarms. DM Electricals Nairobi.",
+        [
+            "Parklands mixes residential and institutional buildings needing safe upgrades and transparent pricing.",
+            "We serve rewires, new circuits, CCTV, and emergency faults across the neighbourhood.",
+        ],
+    ),
+    (
+        "electrician-lavington-nairobi",
+        "Electrician Lavington Nairobi | DM Electricals",
+        "Electrical & smart home in Lavington",
+        "Premium homes in Lavington — lighting, smart switches, generators, solar integration. DM Electricals.",
+        [
+            "Lavington homeowners often request aesthetic lighting, smart home devices, and reliable backup solutions.",
+            "DM Electricals delivers neat workmanship and product guidance aligned with our smart-home service pages.",
+        ],
+    ),
+    (
+        "electrician-kileleshwa-nairobi",
+        "Electrician Kileleshwa Nairobi | DM Electricals",
+        "Apartments & townhouses in Kileleshwa",
+        "Electrical repairs, appliance installs, and upgrades in Kileleshwa, Nairobi. DM Electricals.",
+        [
+            "High-density apartments need fast fault finding and careful noise-aware scheduling.",
+            "We install cookers, water heaters, lighting, and security systems for Kileleshwa residents.",
+        ],
+    ),
 ]
 
+PROVIDER = {
+    "@type": ["Electrician", "LocalBusiness"],
+    "@id": f"{BASE}/#provider",
+    "name": "DM Electricals & Installation",
+    "url": f"{BASE}/",
+    "telephone": "+254799762232",
+    "email": "info@dmelectricals.com",
+    "priceRange": "$$",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mwihoko Road",
+        "addressLocality": "Kasarani",
+        "addressRegion": "Nairobi County",
+        "addressCountry": "KE",
+    },
+    "geo": {"@type": "GeoCoordinates", "latitude": -1.228, "longitude": 36.899},
+    "areaServed": [{"@type": "City", "name": "Nairobi"}, {"@type": "AdministrativeArea", "name": "Nairobi County"}],
+}
 
-def page_html(path_from_root: str, title: str, h1: str, meta: str, paras: list[str]) -> str:
+
+def _breadcrumb(path_from_root: str, h1: str) -> list[dict]:
+    crumbs = [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{BASE}/"},
+    ]
+    if path_from_root.startswith("services/"):
+        crumbs.append({"@type": "ListItem", "position": 2, "name": "Services", "item": f"{BASE}/#services"})
+        crumbs.append({"@type": "ListItem", "position": 3, "name": h1, "item": f"{BASE}/{path_from_root}"})
+    elif path_from_root.startswith("products/"):
+        crumbs.append({"@type": "ListItem", "position": 2, "name": "Products", "item": f"{BASE}/#products"})
+        crumbs.append({"@type": "ListItem", "position": 3, "name": h1, "item": f"{BASE}/{path_from_root}"})
+    elif path_from_root.startswith("areas/"):
+        crumbs.append({"@type": "ListItem", "position": 2, "name": "Areas", "item": f"{BASE}/#contact"})
+        crumbs.append({"@type": "ListItem", "position": 3, "name": h1, "item": f"{BASE}/{path_from_root}"})
+    return crumbs
+
+
+def _faq_entities(h1: str, kind: str) -> list[dict]:
+    base_q: list[tuple[str, str]] = [
+        (
+            "How do I contact DM Electricals for a quote in Nairobi?",
+            "Call 0799 762 232 or 0762 748 694, email info@dmelectricals.com, or use the contact form and WhatsApp links on the main website at dmelectricals.com. We typically respond the same business day.",
+        ),
+        (
+            "Does DM Electricals offer emergency electrical service in Nairobi?",
+            "Yes. We provide 24/7 emergency electrician support for tripping breakers, partial power loss, burning smells, and hazardous faults across Nairobi County, dispatching from our Kasarani base.",
+        ),
+        (
+            "Where is DM Electricals based and which areas do you serve?",
+            "We are based on Mwihoko Road, Kasarani, Nairobi. We regularly serve Kasarani, Roysambu, Westlands, Ruaraka, Thika Road, Embakasi, South B, Kilimani, Karen, Industrial Area, Mombasa Road, Eastleigh, Ngong Road, Upper Hill, Parklands, Lavington, Kileleshwa, and the wider Nairobi County. Kiambu and Ruiru by arrangement.",
+        ),
+    ]
+    if kind == "service":
+        base_q.insert(
+            0,
+            (
+                f"Who installs or repairs {h1.split(' in ')[0]} in Nairobi?",
+                "DM Electricals & Installation is a licensed electrical contractor based on Mwihoko Road, Kasarani. We supply, install, and maintain electrical, security, and backup systems across Nairobi with ERC-aligned workmanship.",
+            ),
+        )
+    elif kind == "area":
+        base_q.insert(
+            0,
+            (
+                f"Is there a reliable electrician for residential and commercial work near {h1}?",
+                "DM Electricals serves this neighbourhood from our Kasarani base with rewiring, installations, CCTV, electric fence, fire alarms, solar integration, and emergency call-outs. Contact us for a site visit or fast fault response.",
+            ),
+        )
+    else:
+        base_q.insert(
+            0,
+            (
+                f"Where can I buy or get installed {h1.split(' in ')[0]} in Nairobi?",
+                "DM Electricals supplies and installs this product line across Nairobi with correct cabling, protection, and warranty-friendly workmanship. Enquire via the main catalogue or WhatsApp.",
+            ),
+        )
+    return [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in base_q]
+
+
+def link_hub_html(kind: str, slug: str) -> str:
+    """Dense internal linking for crawlers and AI entity discovery."""
+    blocks: list[str] = []
+    blocks.append('<nav class="hub" aria-label="Related pages on this site">')
+    blocks.append("<h2>More from DM Electricals</h2>")
+
+    blocks.append("<h3>Electrical services (Nairobi)</h3><ul>")
+    for s, _t, h1s, _m, _p in SERVICES:
+        if kind == "service" and s == slug:
+            continue
+        blocks.append(f'<li><a href="{BASE}/services/{escape(s)}.html">{escape(h1s)}</a></li>')
+    blocks.append("</ul>")
+
+    blocks.append("<h3>Service areas &amp; locations</h3><ul>")
+    for s, _t, h1s, _m, _p in AREAS:
+        if kind == "area" and s == slug:
+            continue
+        blocks.append(f'<li><a href="{BASE}/areas/{escape(s)}.html">{escape(h1s)}</a></li>')
+    blocks.append("</ul>")
+
+    blocks.append("<h3>Popular products</h3><ul>")
+    for i, (s, _t, h1s, _m, _p) in enumerate(PRODUCTS):
+        if kind == "product" and s == slug:
+            continue
+        if i >= 12:
+            break
+        blocks.append(f'<li><a href="{BASE}/products/{escape(s)}.html">{escape(h1s)}</a></li>')
+    blocks.append(f'<li><a href="{BASE}/#products"><strong>Full product catalogue on homepage →</strong></a></li>')
+    blocks.append("</ul>")
+    blocks.append("</nav>")
+    return "\n  ".join(blocks)
+
+
+def page_html(path_from_root: str, title: str, h1: str, meta: str, paras: list[str], *, kind: str, slug: str) -> str:
     canonical = f"{BASE}/{path_from_root}"
     body = "".join(f"<p>{escape(p)}</p>" for p in paras)
-    ld = {
-        "@context": "https://schema.org",
+    hub = link_hub_html(kind, slug)
+
+    faq_items = _faq_entities(h1, kind)
+    faq_node = {"@type": "FAQPage", "mainEntity": faq_items}
+    breadcrumb_node = {"@type": "BreadcrumbList", "itemListElement": _breadcrumb(path_from_root, h1)}
+    web_page = {
         "@type": "WebPage",
         "name": title,
         "description": meta,
@@ -423,40 +672,86 @@ def page_html(path_from_root: str, title: str, h1: str, meta: str, paras: list[s
         "inLanguage": "en-KE",
         "isPartOf": {"@type": "WebSite", "name": "DM Electricals & Installation", "url": f"{BASE}/"},
     }
-    ld_json = json.dumps(ld, ensure_ascii=False)
+
+    graph: list[dict] = [web_page, breadcrumb_node, faq_node]
+
+    if kind == "service":
+        graph.append(
+            {
+                "@type": "Service",
+                "name": h1,
+                "description": meta,
+                "url": canonical,
+                "provider": {"@id": PROVIDER["@id"]},
+                "serviceType": "Electrical contracting",
+                "areaServed": {"@type": "City", "name": "Nairobi"},
+            }
+        )
+
+    graph.append(dict(PROVIDER))
+
+    ld_blob = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
+
+    og = (
+        f'<meta property="og:type" content="website">\n'
+        f'<meta property="og:url" content="{escape(canonical)}">\n'
+        f'<meta property="og:title" content="{escape(title)}">\n'
+        f'<meta property="og:description" content="{escape(meta)}">\n'
+        f'<meta property="og:locale" content="en_KE">\n'
+        f'<meta name="twitter:card" content="summary">\n'
+        f'<meta name="twitter:title" content="{escape(title)}">\n'
+        f'<meta name="twitter:description" content="{escape(meta)}">\n'
+    )
+
+    geo_meta = ""
+    if kind == "area":
+        geo_meta = (
+            '<meta name="geo.region" content="KE-30">\n'
+            '<meta name="geo.placename" content="Nairobi, Kenya">\n'
+            '<meta name="ICBM" content="-1.228, 36.899">\n'
+        )
+
     return f"""<!DOCTYPE html>
 <html lang="en-KE">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(meta)}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="{canonical}">
-<link rel="icon" type="image/svg+xml" href="{BASE}/favicon.svg">
+<link rel="alternate" hreflang="en-KE" href="{canonical}">
+<link rel="alternate" hreflang="en" href="{canonical}">
+{geo_meta}{og}<link rel="icon" type="image/svg+xml" href="{BASE}/favicon.svg">
 <link rel="icon" type="image/x-icon" href="{BASE}/favicon.ico" sizes="48x48 32x32 16x16">
 <link rel="shortcut icon" href="{BASE}/favicon.ico">
 <link rel="apple-touch-icon" href="{BASE}/favicon.ico">
 <style>
-body{{font-family:system-ui,-apple-system,sans-serif;line-height:1.65;max-width:720px;margin:0 auto;padding:2rem 1.25rem;color:#111827;background:#F8F8F8}}
+body{{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.65;max-width:720px;margin:0 auto;padding:2rem 1.25rem;color:#111827;background:#F8F8F8}}
 a{{color:#8B1A2E;font-weight:600}}
 h1{{font-size:1.5rem;line-height:1.25;margin-bottom:1rem}}
+h2{{font-size:1.15rem;margin:1.75rem 0 0.75rem}}
+h3{{font-size:0.95rem;margin:1.25rem 0 0.5rem;color:#374151}}
 header{{margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid #e5e7eb}}
 footer{{margin-top:2rem;padding-top:1rem;border-top:1px solid #e5e7eb;font-size:0.875rem;color:#6b7280}}
+.hub{{margin-top:2rem;padding:1.25rem;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}}
+.hub ul{{margin:0.35rem 0 0.85rem 1rem;padding:0}}
+.hub li{{margin:0.35rem 0}}
 </style>
-<script type="application/ld+json">{ld_json}</script>
+<script type="application/ld+json">{ld_blob}</script>
 </head>
 <body>
 <header>
-  <a href="{BASE}/">← DM Electricals home</a>
+  <nav aria-label="Breadcrumb"><a href="{BASE}/">← DM Electricals home</a></nav>
 </header>
 <main>
   <h1>{escape(h1)}</h1>
   {body}
   <p><a href="{BASE}/#contact">Contact us — phone, WhatsApp &amp; quote form</a></p>
+  {hub}
 </main>
 <footer>
-  DM Electricals &amp; Installation · Mwihoko Road, Kasarani, Nairobi · Kenya · 0799 762 232, 0762 748 694
+  DM Electricals &amp; Installation · Mwihoko Road, Kasarani, Nairobi · Kenya · <a href="tel:+254799762232">0799 762 232</a>, <a href="tel:+254762748694">0762 748 694</a>
 </footer>
 </body>
 </html>
@@ -468,17 +763,17 @@ def write_pages() -> list[str]:
     for slug, title, h1, meta, paras in SERVICES:
         path = f"services/{slug}.html"
         (ROOT / "services").mkdir(parents=True, exist_ok=True)
-        (ROOT / path).write_text(page_html(path, title, h1, meta, paras), encoding="utf-8")
+        (ROOT / path).write_text(page_html(path, title, h1, meta, paras, kind="service", slug=slug), encoding="utf-8")
         urls.append(f"{BASE}/{path}")
     for slug, title, h1, meta, paras in PRODUCTS:
         path = f"products/{slug}.html"
         (ROOT / "products").mkdir(parents=True, exist_ok=True)
-        (ROOT / path).write_text(page_html(path, title, h1, meta, paras), encoding="utf-8")
+        (ROOT / path).write_text(page_html(path, title, h1, meta, paras, kind="product", slug=slug), encoding="utf-8")
         urls.append(f"{BASE}/{path}")
     for slug, title, h1, meta, paras in AREAS:
         path = f"areas/{slug}.html"
         (ROOT / "areas").mkdir(parents=True, exist_ok=True)
-        (ROOT / path).write_text(page_html(path, title, h1, meta, paras), encoding="utf-8")
+        (ROOT / path).write_text(page_html(path, title, h1, meta, paras, kind="area", slug=slug), encoding="utf-8")
         urls.append(f"{BASE}/{path}")
     return urls
 

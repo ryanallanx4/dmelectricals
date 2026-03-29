@@ -16,7 +16,12 @@ DM Electricals provides electrical and industrial installation, fittings, applia
 - Electric fence, fire & alarm, CCTV & security  
 - Wiring, rewiring, fault finding  
 - 24/7 emergency repairs  
+- Solar electrical integration, generator/backup changeover, lighting installation, smart-home electrical  
 - Product supply and installation (consumer units, cables, CCTV kits, energisers, lighting, UPS, solar-related products, etc.)  
+
+## Programmatic SEO & AIO pages
+
+Unique HTML landing pages under `/services/`, `/products/`, and `/areas/` include title/description, canonical, FAQ JSON-LD, breadcrumbs, Electrician/LocalBusiness provider graph, and cross-links (“More from DM Electricals”). **Full URL list:** https://dmelectricals.com/sitemap.xml — also mirrored for crawlers in `llms.txt` at the site root.
 
 ## Location SEO
 

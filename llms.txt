@@ -1,51 +1,57 @@
 # DM Electricals & Installation
 
-> Licensed electrical contractor in Nairobi, Kenya — installations, CCTV, electric fence, fire & alarm systems, emergency repairs, and electrical products. Based on Mwihoko Road, Kasarani.
+> Licensed electrical contractor in Nairobi, Kenya — installations, CCTV, electric fence, fire & alarm systems, solar integration, generators, smart home, emergency repairs, and electrical products. Based on Mwihoko Road, Kasarani.
 
-DM Electricals serves homes, businesses, and industrial clients across Nairobi with ERC-aligned work, transparent pricing, and 24/7 emergency response. The main site is a full visual brochure; additional **SEO landing pages** cover each core service, product line, and service area with unique URLs (see sitemap).
+DM Electricals serves homes, businesses, and industrial clients across Nairobi with ERC-aligned work, transparent pricing, and 24/7 emergency response. The main site is a full visual brochure; **SEO landing pages** (below) cover each core service, product line, and neighbourhood with unique URLs, FAQ markup, and internal linking hubs — use the **sitemap** for the complete list.
 
 **Primary location:** Mwihoko Road, Kasarani, Nairobi, Kenya  
-**Service area:** Greater Nairobi, Kiambu/Ruiru (by arrangement)  
-**Phones:** +254 799 762 232 | +254 762 748 694 (Kenya)
+**Service area:** Greater Nairobi County; Kiambu & Ruiru by arrangement  
+**Phones:** +254 799 762 232 | +254 762 748 694 (Kenya)  
+**Email:** info@dmelectricals.com
+
+**Search topics we address:** electrician Nairobi, emergency electrician near me Nairobi, verified fundi wiring Nairobi, electric fence installer Nairobi, CCTV installation Nairobi, house rewiring Nairobi, solar installation Nairobi, generator changeover Nairobi, socket repair Nairobi, water heater installation Nairobi, smart home electrician Nairobi, industrial electrical Nairobi, MCB tripping fault finding.
 
 ## Site pages
 
-- [Home / full site](https://dmelectricals.com/): Complete HTML page — services, products catalogue, projects, testimonials, contact form, WhatsApp.
+- [Home / full site](https://dmelectricals.com/): Services, products, projects, testimonials, contact, WhatsApp.
 
 ## Service landing pages (Nairobi)
 
 - [Electrical & industrial installation](https://dmelectricals.com/services/electrical-industrial-installation-nairobi.html)
-- [Electrical fittings](https://dmelectricals.com/services/electrical-fittings-nairobi.html)
+- [Electrical fittings & accessories](https://dmelectricals.com/services/electrical-fittings-nairobi.html)
 - [Appliance installation](https://dmelectricals.com/services/appliances-installation-nairobi.html)
 - [Cables & wiring supplies](https://dmelectricals.com/services/electrical-cables-nairobi.html)
 - [Electric fence](https://dmelectricals.com/services/electric-fence-nairobi.html)
-- [Fire & alarm systems](https://dmelectricals.com/services/fire-alarm-systems-nairobi.html)
-- [CCTV & security](https://dmelectricals.com/services/cctv-security-nairobi.html)
+- [Fire detection & alarm systems](https://dmelectricals.com/services/fire-alarm-systems-nairobi.html)
+- [CCTV & security cameras](https://dmelectricals.com/services/cctv-security-nairobi.html)
 - [Wiring & rewiring](https://dmelectricals.com/services/wiring-rewiring-nairobi.html)
 - [24/7 emergency electrician](https://dmelectricals.com/services/emergency-electrician-nairobi.html)
+- [Solar electrical installation & integration](https://dmelectricals.com/services/solar-electrical-installation-nairobi.html)
+- [Generator & backup power electrical](https://dmelectricals.com/services/generator-backup-electrical-nairobi.html)
+- [Electrical fault finding & repairs](https://dmelectricals.com/services/electrical-fault-repairs-nairobi.html)
+- [Lighting installation](https://dmelectricals.com/services/lighting-installation-nairobi.html)
+- [Smart home electrical](https://dmelectricals.com/services/smart-home-electrical-nairobi.html)
 
-## Area landing pages
+## Product & equipment guides (Nairobi)
 
-- [Electrician Kasarani / Mwihoko Road](https://dmelectricals.com/areas/electrician-kasarani-nairobi.html)
-- [Electrician Westlands](https://dmelectricals.com/areas/electrician-westlands-nairobi.html)
-- [Nairobi County coverage](https://dmelectricals.com/areas/electrical-services-nairobi-county.html)
-- [Kiambu & Ruiru](https://dmelectricals.com/areas/electrical-contractor-kiambu-ruiru.html)
+All listed at https://dmelectricals.com/sitemap.xml — examples: consumer units & MCBs, cables & wiring accessories, CCTV kits & cameras, electric fence energisers, lighting & lamps, UPS & stabilisers, solar panels & inverters.
 
-## Product pages (sample — full list in sitemap)
+## Neighbourhood electrician pages
 
-- [CCTV IP systems Nairobi](https://dmelectricals.com/products/cctv-ip-systems-nairobi.html)
-- [Solar panels & inverters](https://dmelectricals.com/products/solar-panels-inverters-nairobi.html)
-- [UPS systems](https://dmelectricals.com/products/ups-systems-nairobi.html)
+Embakasi, South B, Ngong Road, Upper Hill, Parklands, Lavington, Kileleshwa, Kilimani, Westlands, Kasarani, Karen, Industrial Area, Ruiru, Kiambu, Roysambu, Ruaraka, Thika Road, Mombasa Road, Eastleigh, Nairobi County hub — URLs under `/areas/`. Full list: https://dmelectricals.com/sitemap.xml
 
-## Machine-readable summary
+## Machine-readable index
 
-- [Plain summary (Markdown)](https://dmelectricals.com/index.html.md): Compact Markdown for LLM context.
+- **Sitemap:** https://dmelectricals.com/sitemap.xml  
+- **Robots:** https://dmelectricals.com/robots.txt
 
-## Discovery & indexing
+</think>
+<think>
+I made a typo in llms.txt - smart-home-electrical-nairoobi should be nairobi. Let me fix that line in llms.txt
 
-- [Sitemap (all URLs)](https://dmelectricals.com/sitemap.xml): XML sitemap — homepage, every service, product, and area page.
-- [Robots](https://dmelectricals.com/robots.txt): Crawl directives for bots and AI agents.
+Actually check slug in python - smart-home-electrical-nairobi
+</think>
 
-## Optional
 
-- [GitHub repository](https://github.com/ryanallanx4/dmelectricals): Source hosting. Regenerate SEO pages: `py -3 scripts/generate_seo_pages.py`
+<｜tool▁calls▁begin｜><｜tool▁call▁begin｜>
+StrReplace
