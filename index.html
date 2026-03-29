@@ -536,6 +536,61 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
 .footer-btm .badge{font-size:0.68rem;font-weight:600;color:rgba(255,255,255,0.2);display:flex;align-items:center;gap:5px;letter-spacing:0.06em;}
 .footer-btm .badge::before{content:'●';color:#8B1A2E;font-size:0.5rem;}
 
+/* Footer SEO — full-width light slab so links read like main footer (high contrast) */
+.footer-seo-slab{
+  position:relative;
+  z-index:1;
+  background:linear-gradient(180deg,#e8eaef 0%,#dfe3ea 100%);
+  padding:28px 0 32px;
+  border-top:1px solid rgba(0,0,0,0.07);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+}
+.footer-seo-slab .footer-seo{margin:0;padding:0;border:0;}
+.footer-seo-title{
+  display:block;
+  width:100%;
+  background:#1e40af;
+  color:#fff;
+  font-size:0.68rem;
+  font-weight:800;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  padding:11px 16px;
+  margin:0 0 14px;
+  border-radius:6px;
+  box-sizing:border-box;
+}
+.footer-seo-links-wrap{margin-bottom:22px;}
+.footer-seo-links-wrap:last-of-type{margin-bottom:0;}
+.footer-seo-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+.footer-seo-links a{
+  display:inline-flex;
+  align-items:center;
+  background:#2563eb;
+  color:#fff;
+  font-size:0.78rem;
+  font-weight:600;
+  padding:10px 16px;
+  border-radius:6px;
+  text-decoration:none;
+  line-height:1.25;
+  box-shadow:0 2px 6px rgba(37,99,235,0.28);
+  transition:background 0.15s,color 0.15s,transform 0.15s;
+}
+.footer-seo-links a:hover{background:#1d4ed8;color:#fff;}
+.footer-seo-links a:focus-visible{outline:2px solid #1e3a8a;outline-offset:2px;}
+.footer-seo-links a.footer-seo-muted{background:#475569;box-shadow:0 2px 6px rgba(30,41,59,0.25);}
+.footer-seo-links a.footer-seo-muted:hover{background:#334155;}
+@media(max-width:768px){
+  .footer-seo-slab{padding:22px 0 26px;}
+  .footer-seo-links a{font-size:0.72rem;padding:9px 13px;}
+}
+
 /* FLOAT */
 .float-wa{position:fixed;bottom:26px;right:26px;z-index:999;width:50px;height:50px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,0.45);animation:waPulse 2.8s var(--ease-smooth) infinite;cursor:pointer;transition:transform 0.2s var(--ease-smooth);transform:translateZ(0);}
 .float-wa:hover{animation:none;transform:translateZ(0) scale(1.1);}
@@ -1243,43 +1298,53 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
         <div class="fci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Sat 7am–7pm | 24/7 Emergency</span></div>
       </div>
     </div>
-    <nav class="footer-seo" aria-label="Local guides and service pages" style="margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.08);">
-      <p style="font-size:0.68rem;font-weight:700;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.12em;">Nairobi &amp; area guides</p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px 14px;font-size:0.76rem;line-height:1.5;margin-bottom:14px;">
-        <a href="areas/electrical-services-nairobi-county.html" style="color:rgba(255,255,255,0.45);">Nairobi County</a>
-        <a href="areas/electrician-kasarani-nairobi.html" style="color:rgba(255,255,255,0.45);">Kasarani</a>
-        <a href="areas/electrician-roysambu-nairobi.html" style="color:rgba(255,255,255,0.45);">Roysambu</a>
-        <a href="areas/electrician-ruaraka-nairobi.html" style="color:rgba(255,255,255,0.45);">Ruaraka</a>
-        <a href="areas/electrician-thika-road-nairobi.html" style="color:rgba(255,255,255,0.45);">Thika Road</a>
-        <a href="areas/electrician-westlands-nairobi.html" style="color:rgba(255,255,255,0.45);">Westlands</a>
-        <a href="areas/electrician-parklands-nairobi.html" style="color:rgba(255,255,255,0.45);">Parklands</a>
-        <a href="areas/electrician-kilimani-nairobi.html" style="color:rgba(255,255,255,0.45);">Kilimani</a>
-        <a href="areas/electrician-lavington-nairobi.html" style="color:rgba(255,255,255,0.45);">Lavington</a>
-        <a href="areas/electrician-kileleshwa-nairobi.html" style="color:rgba(255,255,255,0.45);">Kileleshwa</a>
-        <a href="areas/electrician-upper-hill-nairobi.html" style="color:rgba(255,255,255,0.45);">Upper Hill</a>
-        <a href="areas/electrician-ngong-road-nairobi.html" style="color:rgba(255,255,255,0.45);">Ngong Road</a>
-        <a href="areas/electrician-karen-nairobi.html" style="color:rgba(255,255,255,0.45);">Karen</a>
-        <a href="areas/electrician-embakasi-nairobi.html" style="color:rgba(255,255,255,0.45);">Embakasi</a>
-        <a href="areas/electrician-south-b-nairobi.html" style="color:rgba(255,255,255,0.45);">South B</a>
-        <a href="areas/electrician-mombasa-road-nairobi.html" style="color:rgba(255,255,255,0.45);">Mombasa Road</a>
-        <a href="areas/electrician-industrial-area-nairobi.html" style="color:rgba(255,255,255,0.45);">Industrial Area</a>
-        <a href="areas/electrician-eastleigh-nairobi.html" style="color:rgba(255,255,255,0.45);">Eastleigh</a>
-        <a href="areas/electrical-contractor-kiambu-ruiru.html" style="color:rgba(255,255,255,0.45);">Kiambu &amp; Ruiru</a>
-      </div>
-      <p style="font-size:0.68rem;font-weight:700;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.12em;">Service &amp; product guides</p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px 14px;font-size:0.76rem;line-height:1.5;">
-        <a href="services/emergency-electrician-nairobi.html" style="color:rgba(255,255,255,0.45);">24/7 emergency</a>
-        <a href="services/electrical-fault-repairs-nairobi.html" style="color:rgba(255,255,255,0.45);">Fault repairs</a>
-        <a href="services/solar-electrical-installation-nairobi.html" style="color:rgba(255,255,255,0.45);">Solar install</a>
-        <a href="services/generator-backup-electrical-nairobi.html" style="color:rgba(255,255,255,0.45);">Generator backup</a>
-        <a href="services/smart-home-electrical-nairobi.html" style="color:rgba(255,255,255,0.45);">Smart home</a>
-        <a href="services/cctv-security-nairobi.html" style="color:rgba(255,255,255,0.45);">CCTV</a>
-        <a href="services/electric-fence-nairobi.html" style="color:rgba(255,255,255,0.45);">Electric fence</a>
-        <a href="services/wiring-rewiring-nairobi.html" style="color:rgba(255,255,255,0.45);">Rewiring</a>
-        <a href="products/solar-panels-inverters-nairobi.html" style="color:rgba(255,255,255,0.45);">Solar products</a>
-        <a href="sitemap.xml" style="color:rgba(255,255,255,0.35);">Sitemap</a>
-      </div>
-    </nav>
+  </div>
+  <div class="footer-seo-slab">
+    <div class="container">
+      <nav class="footer-seo" aria-label="Local guides and service pages">
+        <div class="footer-seo-links-wrap">
+          <p class="footer-seo-title">Nairobi &amp; area guides</p>
+          <div class="footer-seo-links">
+            <a href="areas/electrical-services-nairobi-county.html">Nairobi County</a>
+            <a href="areas/electrician-kasarani-nairobi.html">Kasarani</a>
+            <a href="areas/electrician-roysambu-nairobi.html">Roysambu</a>
+            <a href="areas/electrician-ruaraka-nairobi.html">Ruaraka</a>
+            <a href="areas/electrician-thika-road-nairobi.html">Thika Road</a>
+            <a href="areas/electrician-westlands-nairobi.html">Westlands</a>
+            <a href="areas/electrician-parklands-nairobi.html">Parklands</a>
+            <a href="areas/electrician-kilimani-nairobi.html">Kilimani</a>
+            <a href="areas/electrician-lavington-nairobi.html">Lavington</a>
+            <a href="areas/electrician-kileleshwa-nairobi.html">Kileleshwa</a>
+            <a href="areas/electrician-upper-hill-nairobi.html">Upper Hill</a>
+            <a href="areas/electrician-ngong-road-nairobi.html">Ngong Road</a>
+            <a href="areas/electrician-karen-nairobi.html">Karen</a>
+            <a href="areas/electrician-embakasi-nairobi.html">Embakasi</a>
+            <a href="areas/electrician-south-b-nairobi.html">South B</a>
+            <a href="areas/electrician-mombasa-road-nairobi.html">Mombasa Road</a>
+            <a href="areas/electrician-industrial-area-nairobi.html">Industrial Area</a>
+            <a href="areas/electrician-eastleigh-nairobi.html">Eastleigh</a>
+            <a href="areas/electrical-contractor-kiambu-ruiru.html">Kiambu &amp; Ruiru</a>
+          </div>
+        </div>
+        <div class="footer-seo-links-wrap">
+          <p class="footer-seo-title">Service &amp; product guides</p>
+          <div class="footer-seo-links">
+            <a href="services/emergency-electrician-nairobi.html">24/7 emergency</a>
+            <a href="services/electrical-fault-repairs-nairobi.html">Fault repairs</a>
+            <a href="services/solar-electrical-installation-nairobi.html">Solar install</a>
+            <a href="services/generator-backup-electrical-nairobi.html">Generator backup</a>
+            <a href="services/smart-home-electrical-nairobi.html">Smart home</a>
+            <a href="services/cctv-security-nairobi.html">CCTV</a>
+            <a href="services/electric-fence-nairobi.html">Electric fence</a>
+            <a href="services/wiring-rewiring-nairobi.html">Rewiring</a>
+            <a href="products/solar-panels-inverters-nairobi.html">Solar products</a>
+            <a href="sitemap.xml" class="footer-seo-muted">Sitemap</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="container section-content">
     <div class="footer-btm">
       <p>© <span id="yr"></span> DM Electricals &amp; Installation. All rights reserved. Mwihoko Road, Kasarani, Nairobi.</p>
       <div class="badge">Powered by Quality &amp; Safety</div>
