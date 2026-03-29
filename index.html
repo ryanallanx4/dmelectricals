@@ -146,8 +146,26 @@ a{text-decoration:none;color:inherit;}
 .topbar-phone-lines a{white-space:nowrap;}
 .topbar-sep{opacity:0.75;}
 
+/* ===== SITE HEADER (rounded top bar + nav) ===== */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  width:calc(100% - 32px);
+  max-width:1280px;
+  margin:12px auto 0;
+  padding-top:env(safe-area-inset-top,0);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07),0 1px 0 rgba(255,255,255,0.55) inset;
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  isolation:isolate;
+}
+.topbar{border-radius:0;padding-top:0;}
+
 /* ===== NAV ===== */
-nav{position:sticky;top:0;z-index:1000;background:rgba(248,248,248,0.93);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);border-bottom:1px solid var(--border);min-height:70px;height:auto;transform:translateZ(0);backface-visibility:hidden;}
+nav{position:relative;z-index:1;background:rgba(248,248,248,0.93);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);border-top:1px solid rgba(255,255,255,0.35);border-bottom:none;min-height:70px;height:auto;transform:translateZ(0);backface-visibility:hidden;}
 .nav-inner{max-width:1260px;margin:0 auto;padding:0 32px;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
 .nav-logo{display:flex;align-items:center;gap:13px;min-width:0;flex:1 1 auto;}
 .logo-mark{width:46px;height:46px;background:#111827;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;}
@@ -628,6 +646,7 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
 /* RESPONSIVE */
 @media(max-width:1024px){
   .topbar-inner{padding:8px 24px;}
+  .site-header{width:calc(100% - 24px);margin-top:10px;border-radius:var(--radius-md);}
   .nav-inner{padding:0 24px;}
   .hero-inner{grid-template-columns:1fr;}
   .hero-right{max-width:580px;}
@@ -649,6 +668,7 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
   .topbar-item--emerg{display:none;}
   .topbar-right{width:100%;padding-top:10px;border-top:1px solid rgba(255,255,255,0.14);margin:0;}
   .topbar-right a{word-break:break-word;}
+  .site-header{width:calc(100% - 20px);margin-top:8px;border-radius:var(--radius-md);}
   .nav-inner{padding:10px 18px;min-height:0;gap:10px;}
   .nav-links{display:none;}
   .ham{display:flex;}
@@ -688,6 +708,7 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
   .logo-txt strong{font-size:0.78rem;font-weight:800;}
   .btn-cta{padding:9px 12px;font-size:0.68rem;}
   .btn-cta .cta-arrow{display:none;}
+  .site-header{width:calc(100% - 16px);margin-top:6px;border-radius:22px;}
   .nav-inner{padding:8px 16px;}
   .hero-inner{padding:0 16px;}
   .mob-nav{padding-left:16px;padding-right:16px;}
@@ -696,7 +717,8 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
 </head>
 <body>
 
-<!-- TOPBAR -->
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
 <div class="topbar">
   <div class="topbar-inner">
     <div class="topbar-left">
@@ -707,8 +729,6 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
     <div class="topbar-right"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:info@dmelectricals.com">info@dmelectricals.com</a></div>
   </div>
 </div>
-
-<!-- NAV -->
 <nav id="nav">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
@@ -734,6 +754,7 @@ footer{background:#111827;color:#fff;padding:66px 0 0;position:relative;overflow
     <div class="ham" id="ham"><span></span><span></span><span></span></div>
   </div>
 </nav>
+</header>
 
 <div class="mob-nav" id="mobNav">
   <a href="#services">Services</a>
@@ -1383,8 +1404,10 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 // Nav height → mobile menu position (sticky bar can wrap on small screens)
 function syncNavOffset(){
+  const shell=document.getElementById('siteHeader');
   const nav=document.getElementById('nav');
-  if(nav) document.documentElement.style.setProperty('--nav-offset', nav.offsetHeight+'px');
+  const el=shell||nav;
+  if(el) document.documentElement.style.setProperty('--nav-offset', el.offsetHeight+'px');
 }
 syncNavOffset();
 window.addEventListener('resize', syncNavOffset);
